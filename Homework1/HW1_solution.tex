@@ -27,13 +27,13 @@
 
 
 \thispagestyle{empty} \pagestyle{myheadings} \markright{Homework
-\#: CS 216, Image Understanding: Spring 2014}
+1: CS 217 Spring 2015}
 
 
 
 \title{CS 217 Homework 1}
 \author{Zachary DeStefano, 15247592}
-\date{Due Date: April 16}
+\date{Due Date: April 16, 2015}
 
 \maketitle
 
@@ -41,15 +41,33 @@
 
 \newpage
 
-Some writing
+\section*{Problem 1}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[height=4in]{prob1plot.jpg}
-%\caption{Probability of Class Labels with decision boundaries marked}
-%\end{figure}
+Using our assumptions about lenses, we have the following diagram:
 
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{hw1prob1diagram.pdf}
+\caption{Diagram of lens and its focal length}
+\end{figure}
 
+The left side of the lens gives us the following equation using similar triangles
+\[
+\frac{y}{f} = \frac{y+y'}{D'}
+\]
+The right side of the length gives us the following equation using similar triangles
+\[
+\frac{y'}{f} = \frac{y+y'}{D}
+\]
+Adding together the two equations, we get the following
+\[
+\frac{1}{f} (y + y') = (\frac{1}{D} + \frac{1}{D'})(y + y')
+\]
+Cancelling the term $y+y'$ we end up with
+\[
+\frac{1}{f} = \frac{1}{D} + \frac{1}{D'}
+\]
+This is the thin lens equation
 \end{document}
 
 
