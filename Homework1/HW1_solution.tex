@@ -108,6 +108,8 @@ The vertical field of view (in degrees) is as follows:
 2arctan(\frac{480}{20 \cdot 100}) = 26.9915
 \]
 
+\newpage
+
 \subsection{Part 2}
 
 A rotation of $\theta$ about the y axis has the following form
@@ -121,6 +123,30 @@ For us, $\theta=-45$ degrees, and we need homogeneous coordinates, thus our matr
 0 & 1 & 0 & 0\\
 1/\sqrt{2} & 0 & 1/\sqrt{2} & 0 \\
 0 & 0 & 0 & 1 \end{array} \right)\]
+Translating to the right by 1 is the same as moving by one unit along the positive x-axis, which has the following matrix T 
+\[ \left( \begin{array}{cccc}
+1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \end{array} \right)\]
+Since we are translating to the right after rotation, we have to apply the matrix $T$ in the new rotated coordinated system, thus to go from original world coordinate to final ones, you need to compute $RT$ which ends up being
+\[ \left( \begin{array}{cccc}
+1/\sqrt{2} & 0 & -1/\sqrt{2} & 1/\sqrt{2} \\
+0 & 1 & 0 & 0\\
+1/\sqrt{2} & 0 & 1/\sqrt{2} & 1/\sqrt{2} \\
+0 & 0 & 0 & 1 \end{array} \right)\]
+For $(1,1,1)$ in the world coordinate system, let $p$ be the homogenous version of the point, so 
+\[
+p=(1,1,1,1)^T
+\]
+In order to find its coordinates in the new system, we need to find a vector $x$ such that $RTx=p$ thus 
+\[
+x=(RT)^{-1} p
+\] 
+After computing $x$ it turns out the point in the new coordinate system is as follows
+\[
+(\sqrt{2} - 1, 1,0)
+\]
 
 \end{document}
 
