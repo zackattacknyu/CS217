@@ -108,6 +108,20 @@ The vertical field of view (in degrees) is as follows:
 2arctan(\frac{480}{20 \cdot 100}) = 26.9915
 \]
 
+\subsection{Part 2}
+
+A rotation of $\theta$ about the y axis has the following form
+\[ \left( \begin{array}{ccc}
+cos(\theta) & 0 & sin(\theta) \\
+0 & 1 & 0 \\
+-sin(\theta) & 0 & cos(\theta) \end{array} \right)\]
+For us, $\theta=-45$ degrees, and we need homogeneous coordinates, thus our matrix $R$ is the following
+\[ \left( \begin{array}{cccc}
+1/\sqrt{2} & 0 & -1/\sqrt{2} & 0 \\
+0 & 1 & 0 & 0\\
+1/\sqrt{2} & 0 & 1/\sqrt{2} & 0 \\
+0 & 0 & 0 & 1 \end{array} \right)\]
+
 \end{document}
 
 
