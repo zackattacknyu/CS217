@@ -95,6 +95,7 @@ calib = calib./calib(12);
 calibMatrix = (reshape(calib,[4 3]))';
 
 [Qmat,Rmat] = qr(calibMatrix);
+[Rmat1,Qmat1] = rq(calibMatrix);
 
 %used for verification
 CP = calibMatrix*Pmatrix;
