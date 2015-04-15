@@ -68,8 +68,7 @@ camR.C = camR.C./camR.C(3,4);
 %this sets up the A matrix
 %       for Ac=0
 
-%n = size(X,2);
-n=20;
+n = size(X,2);
 x = xL;
 
 pMat = [x(:,1:n);ones(1,n)];
@@ -95,9 +94,15 @@ calib = V(:,end);
 calib = calib./calib(12);
 calibMatrix = (reshape(calib,[4 3]))';
 
-
 [Qmat,Rmat] = qr(calibMatrix);
 
+%used for verification
+CP = calibMatrix*Pmatrix;
+CP(1,:)=CP(1,:)./CP(3,:);
+CP(2,:)=CP(2,:)./CP(3,:);
+CP(3,:)=CP(3,:)./CP(3,:);
+diff = sum(sum(abs(CP-pMat)));
+calibDiff = sum(sum(abs(camL.C-calibMatrix)));
 
 %%
 
