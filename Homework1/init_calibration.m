@@ -60,28 +60,27 @@ camL.Ext = generateExtrinsic(camL);
 camR.Ext = generateExtrinsic(camR);
 
 camL.C = camL.K*camL.Ext;
-camL.C = camL.C./camL.C(12);
+camL.C = camL.C./camL.C(3,4);
 camR.C = camR.K*camR.Ext;
-camR.C = camR.C./camR.C(12);
+camR.C = camR.C./camR.C(3,4);
 
 %%
 %this sets up the A matrix
 %       for Ac=0
 
 %n = size(X,2);
-n=1000;
+n=20;
 x = xL;
 
 pMat = [x(:,1:n);ones(1,n)];
 Pmatrix = [X(:,1:n);ones(1,n)];
-PmatrixT = transpose(Pmatrix);
 xVals = x(1,1:n);
 yVals = x(2,1:n);
 
 %assemble the A matrix as specified in the slides
 A = zeros(2*n,12);
 for i = 1:n
-   PiT = PmatrixT(i,:);
+   PiT = transpose(Pmatrix(:,i));
    start = 2*i-1;
    A(start:start+1,:) = ...
        [0 0 0 0 -PiT PiT.*yVals(i);...
@@ -95,10 +94,7 @@ calib = V(:,end);
 %make the matrix have uniform scale
 calib = calib./calib(12);
 calibMatrix = reshape(calib,[3 4]);
-CP = calibMatrix*Pmatrix;
-CP(1,:) = CP(1,:)./CP(3,:);
-CP(2,:) = CP(2,:)./CP(3,:);
-CP(3,:) = CP(3,:)./CP(3,:);
+
 
 [Qmat,Rmat] = qr(calibMatrix);
 
