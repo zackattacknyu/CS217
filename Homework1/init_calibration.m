@@ -93,7 +93,7 @@ calib = V(:,end);
 
 %make the matrix have uniform scale
 calib = calib./calib(12);
-calibMatrix = reshape(calib,[3 4]);
+calibMatrix = (reshape(calib,[4 3]))';
 
 
 [Qmat,Rmat] = qr(calibMatrix);
