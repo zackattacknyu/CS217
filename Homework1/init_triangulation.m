@@ -75,13 +75,13 @@ rotL = camL.R;
 rotR = camR.R;
 tVec = camR.t-camL.t;
 
-curNum = 1;
-xLcur = xL(:,curNum);
-xRcur = xR(:,curNum);
+curNum = 5;
+xLcur = (xL(:,curNum)-camL.c)./camL.m;
+xRcur = (xR(:,curNum)-camR.c)./camR.m;
 pixelLocL = [xLcur(1)/camL.f;xLcur(2)/camL.f;1];
-pixelLocR = [xRcur(1)/camL.f;xRcur(2)/camR.f;1];
-AmatL = camL.R*pixelLocL;
-AmatR = camR.R*pixelLocR;
+pixelLocR = [xRcur(1)/camR.f;xRcur(2)/camR.f;1];
+AmatL = pixelLocL;
+AmatR = inv(camL.R)*camR.R*pixelLocR;
 Amat = [AmatL -AmatR];
 
 %finally, u vector is pinv(A)*t
