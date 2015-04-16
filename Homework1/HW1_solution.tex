@@ -154,6 +154,15 @@ After computing $x$ it turns out the point in the new coordinate system is as fo
 Here is my calibrate.m function
 \lstinputlisting[firstline=1, lastline=55]{calibrate.m}
 
+\subsection{Part 1}
+
+I used the following code to generate the data set and then test the calibrate function:
+\lstinputlisting[firstline=1, lastline=85]{test_calibration.m}
+All of the differences ended up being trivial and were likely due to floating point error, thus the function itself works very well. \\
+\\
+I then introduced noise as was done in the function. I used the noisy pixel locations and kept the original 3D locations to see what camera parameters were obtained. The original script used a noise factor of 0.01. I decided to also use 0.02 and 0.1 as noise factors to see what increasing noise does to the parameters. Here was my script:
+\lstinputlisting[firstline=89, lastline=105]{test_calibration.m}
+
 \end{document}
 
 

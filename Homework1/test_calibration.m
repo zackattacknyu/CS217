@@ -1,10 +1,6 @@
-%
-% This script tests the project and triangulate functions.
-% You may want to modify it to try other tests and/or cut
-% and paste bits into your interactive MATLAB session as 
-% you are debugging.
-%
 
+%%
+%this part generates the data set
 
 %
 % first generate our test figure in 3D
@@ -65,6 +61,8 @@ camR.C = camR.K*camR.Ext;
 camR.C = camR.C./camR.C(3,4);
 
 %%
+
+%this runs the calibration function
 camLtest = calibrate(X,xL);
 camRtest = calibrate(X,xR);
 
@@ -88,38 +86,23 @@ tDiffR = sum(abs(camR.t-camRtest.t));
 
 %%
 
-%
-% now try to recover the 3D locations from the 2D views
-% add some noise to make the process more realistic.
-%
-xLnoisy = xL + 0.01*randn(size(xL)); 
-xRnoisy = xR + 0.01*randn(size(xR));
-Xrecov = triangulate(xLnoisy,xRnoisy,camL,camR);
+xLnoisy1 = xL + 0.01*randn(size(xL)); 
+xRnoisy1 = xR + 0.01*randn(size(xR));
 
-%
-% display results as a cloud of points
-%
-figure(3); clf;
-plot3(X(1,:),X(2,:),X(3,:),'.');
-hold on;
-plot3(Xrecov(1,:),Xrecov(2,:),Xrecov(3,:),'ro');
-axis image;
-axis vis3d;
-grid on;
-legend('original points','recovered points')
+camLtest1 = calibrate(X,xLnoisy1);
+camRtest1 = calibrate(X,xRnoisy1);
 
-%
-%display results as a surface
-%
-figure(4);
-subplot(2,1,1);
-tri = delaunay(X(1,:),X(2,:));
-trisurf(tri,X(1,:),X(2,:),X(3,:));
-axis equal; axis vis3d; grid on;
-title('original shape');
-subplot(2,1,2);
-tri = delaunay(Xrecov(1,:),Xrecov(2,:));
-trisurf(tri,Xrecov(1,:),Xrecov(2,:),Xrecov(3,:));
-axis equal; axis vis3d; grid on;
-title('recovered shape');
+xLnoisy2 = xL + 0.02*randn(size(xL)); 
+xRnoisy2 = xR + 0.02*randn(size(xR));
+
+camLtest2 = calibrate(X,xLnoisy2);
+camRtest2 = calibrate(X,xRnoisy2);
+
+xLnoisy3 = xL + 0.1*randn(size(xL)); 
+xRnoisy3 = xR + 0.1*randn(size(xR));
+
+camLtest3 = calibrate(X,xLnoisy3);
+camRtest3 = calibrate(X,xRnoisy3);
+
+
 
