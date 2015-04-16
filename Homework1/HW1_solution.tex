@@ -325,15 +325,30 @@ After running the program on the first image, it was able to extract these grid 
 \includegraphics[height=4in]{prob3plot2.png}
 \caption{Results for Image 1}
 \end{figure}
-After specifying everything, it output the following result:
+I continued specifying corners for the rest of the images and these were the instrinsic parameters that resulted:
 \begin{verbatim}
-Translation vector: Tc_ext = [ -118.951269 	 84.063515 	 2867.531624 ]
-Rotation vector:   omc_ext = [ -2.884724 	 -1.127688 	 0.226805 ]
-Rotation matrix:    Rc_ext = [ 0.725718 	 0.671732 	 -0.148696
-                               0.676988 	 -0.735734 	 -0.019595
-                               -0.122563 	 -0.086445 	 -0.988689 ]
-Pixel error:           err = [ 1.57895 	 1.71747 ]
+Calibration results (with uncertainties):
+
+Focal Length:          fc = [ 1602.72820   1627.13289 ] ± [ 75.45401   76.76484 ]
+Principal point:       cc = [ 830.78219   563.59275 ] ± [ 41.54681   54.40452 ]
+Skew:             alpha_c = [ 0.00000 ] ± [ 0.00000  ]   => angle of pixel axes = 90.00000 ± 0.00000 degrees
+Distortion:            kc = [ 0.61729   -2.11774   -0.01065   0.02242  0.00000 ] ± [ 0.20311   1.40105   0.01976   0.01779  0.00000 ]
+Pixel error:          err = [ 3.59673   2.89028 ]
+
+Note: The numerical errors are approximately three times the standard deviations (for reference).
+
 \end{verbatim}
+Here is the extrinsic matrix visual
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{prob3plot3.png}
+\caption{Extrinsic parameters with single camera}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{prob3plot4.png}
+\caption{Extrinsic parameters with world viewpoint}
+\end{figure}
 
 \end{document}
 
