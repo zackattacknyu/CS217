@@ -73,11 +73,6 @@ calibDiffL = sum(sum(abs(camLtest.C-camL.C)));
 calibDiffR = sum(sum(abs(camRtest.C-camR.C)));
 
 
-%%
-
-[Qmat,Rmat] = qr(calibMatrix);
-[Rmat1,Qmat1] = rq(calibMatrix);
-
 
 %%
 

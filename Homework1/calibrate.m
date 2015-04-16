@@ -36,5 +36,21 @@ calib = V(:,end);
 calib = calib./calib(12);
 cam.C = (reshape(calib,[4 3]))';
 
+translationCol = cam.C(:,4);
+mainMat = cam.C(:,1:3);
+[Kmat,Rinv] = rq(mainMat);
+
+%normalizes by last entry
+KmatNorm = Kmat./Kmat(9);
+cam.K = KmatNorm;
+cam.f = [KmatNorm(1,1);KmatNorm(2,2)];
+cam.m = [1;1];
+cam.c = [KmatNorm(1,3);KmatNorm(2,3)];
+
+%gets rotation
+Rmat = -inv(Rinv);
+cam.R = Rmat;
+cam.t = Rmat*inv(Kmat)*translationCol;
+
 end
 

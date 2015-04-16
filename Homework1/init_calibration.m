@@ -94,8 +94,7 @@ calib = V(:,end);
 calib = calib./calib(12);
 calibMatrix = (reshape(calib,[4 3]))';
 
-[Qmat,Rmat] = qr(calibMatrix);
-[Rmat1,Qmat1] = rq(calibMatrix);
+
 
 %used for verification
 CP = calibMatrix*Pmatrix;
@@ -104,6 +103,21 @@ CP(2,:)=CP(2,:)./CP(3,:);
 CP(3,:)=CP(3,:)./CP(3,:);
 diff = sum(sum(abs(CP-pMat)));
 calibDiff = sum(sum(abs(camL.C-calibMatrix)));
+
+%%
+
+translationCol = calibMatrix(:,4);
+mainMat = calibMatrix(:,1:3);
+[Kmat,Rinv] = rq(mainMat);
+
+%normalizes by last entry
+KmatNorm = Kmat./Kmat(9);
+mVec = [KmatNorm(1,1);KmatNorm(2,2)];
+cVec = [KmatNorm(1,3);KmatNorm(2,3)];
+
+%gets rotation
+Rmat = -inv(Rinv);
+transVector = Rmat*inv(Kmat)*translationCol;
 
 %%
 
