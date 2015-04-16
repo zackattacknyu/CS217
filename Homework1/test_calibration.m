@@ -72,7 +72,19 @@ camRtest = calibrate(X,xR);
 calibDiffL = sum(sum(abs(camLtest.C-camL.C)));
 calibDiffR = sum(sum(abs(camRtest.C-camR.C)));
 
+%verify m and c
+mDiffL = sum(abs(camL.m-camLtest.m));
+cDiffL = sum(abs(camL.c-camLtest.c));
+mDiffR = sum(abs(camR.m-camRtest.m));
+cDiffR = sum(abs(camR.c-camRtest.c));
 
+%verify R
+RdiffL = sum(sum(abs(camL.R-camLtest.R)));
+RdiffR = sum(sum(abs(camR.R-camRtest.R)));
+
+%verify t
+tDiffL = sum(abs(camL.t-camLtest.t));
+tDiffR = sum(abs(camR.t-camRtest.t));
 
 %%
 

@@ -43,8 +43,8 @@ mainMat = cam.C(:,1:3);
 %normalizes by last entry
 KmatNorm = Kmat./Kmat(9);
 cam.K = KmatNorm;
-cam.f = [KmatNorm(1,1);KmatNorm(2,2)];
-cam.m = [1;1];
+cam.m = [KmatNorm(1,1);KmatNorm(2,2)];
+cam.f = 1;
 cam.c = [KmatNorm(1,3);KmatNorm(2,3)];
 
 %gets rotation
