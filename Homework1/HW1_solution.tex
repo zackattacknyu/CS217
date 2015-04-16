@@ -3,6 +3,7 @@
 \usepackage{times}
 \usepackage{amssymb}
 \usepackage{float}
+\usepackage{listings}
 
 \newcount\refno\refno=1
 \def\ref{\the\refno \global\advance\refno by 1}
@@ -147,6 +148,11 @@ After computing $x$ it turns out the point in the new coordinate system is as fo
 \[
 (\sqrt{2} - 1, 1,0)
 \]
+
+\section{Problem 3}
+
+Here is my calibrate.m function
+\lstinputlisting[firstline=1, lastline=55]{calibrate.m}
 
 \end{document}
 
