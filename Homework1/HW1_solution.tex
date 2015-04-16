@@ -331,8 +331,10 @@ Calibration results (with uncertainties):
 
 Focal Length:          fc = [ 1602.72820   1627.13289 ] ± [ 75.45401   76.76484 ]
 Principal point:       cc = [ 830.78219   563.59275 ] ± [ 41.54681   54.40452 ]
-Skew:             alpha_c = [ 0.00000 ] ± [ 0.00000  ]   => angle of pixel axes = 90.00000 ± 0.00000 degrees
-Distortion:            kc = [ 0.61729   -2.11774   -0.01065   0.02242  0.00000 ] ± [ 0.20311   1.40105   0.01976   0.01779  0.00000 ]
+Skew:             alpha_c = [ 0.00000 ] ± [ 0.00000  ]   
+									=> angle of pixel axes = 90.00000 ± 0.00000 degrees
+Distortion:            kc = [ 0.61729   -2.11774   -0.01065   0.02242  0.00000 ] 
+									± [ 0.20311   1.40105   0.01976   0.01779  0.00000 ]
 Pixel error:          err = [ 3.59673   2.89028 ]
 
 Note: The numerical errors are approximately three times the standard deviations (for reference).
@@ -349,6 +351,8 @@ Here is the extrinsic matrix visual
 \includegraphics[height=4in]{prob3plot4.png}
 \caption{Extrinsic parameters with world viewpoint}
 \end{figure}
+
+When running this program, it ran through all the images and thus had many more points to use. Some of the differences that occured were likely the result of how the data was brought into the program. In some of the images, the grid corners were not very accurate whereas in other ones they were quite accurate. Also, the program labelled X and Y somewhat arbitrarily.
 
 \end{document}
 
