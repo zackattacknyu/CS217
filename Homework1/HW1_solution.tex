@@ -153,6 +153,8 @@ After computing $x$ it turns out the point in the new coordinate system is as fo
 
 Here is my calibrate.m function
 \lstinputlisting[firstline=1, lastline=55]{calibrate.m}
+It uses the function rq.m that I found on the internet and was written by a professor at NYU
+\lstinputlisting[firstline=1, lastline=27]{rq.m}
 
 \subsection{Part 1}
 
@@ -224,7 +226,9 @@ I ended up getting the following error:
 Warning: Matrix is singular, close to singular or badly scaled.
          Results may be inaccurate. RCOND = NaN. 
 \end{verbatim}
-This likely occurred because our surface has a uniform z value meaning there are many possible calibration matrices that could obtain our result. 
+As it turns out, performing the SVD on our matrix fails to find the proper vector $c$ that indicates a calibration matrix. The last column of the $V$ matrix is all 0 values except for a -1 in the second to last entry. This likely occured because every point in the 3D coordinates has the same $z$ value so there are many possible placements of the camera and the image plane. The 0 values result from the fact that the equation is not linearly independent. \\
+\\
+The linear dependence comes from the fact that we have a plane in 3D. Thus we can place the image plane wherever we want and then find the other camera parameters. Likewise, we can place the camera wherever we want and then come up with a proper image plane. 
 
 \end{document}
 
