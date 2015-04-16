@@ -215,6 +215,17 @@ Lastly, I compared the camera location parameter t. Since it was a vector, I lin
 
 The camera location parameter obtained does start to increasingly vary as noise increases. Again though, the small amount of noise we introduced did not change it a whole lot. 
 
+\subsection{Part 2}
+
+This is the code I used to test it on image 1:
+\lstinputlisting[firstline=1, lastline=21]{prob3part2.m}
+I ended up getting the following error:
+\begin{verbatim}
+Warning: Matrix is singular, close to singular or badly scaled.
+         Results may be inaccurate. RCOND = NaN. 
+\end{verbatim}
+This likely occurred because our surface has a uniform z value meaning there are many possible calibration matrices that could obtain our result. 
+
 \end{document}
 
 
