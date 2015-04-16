@@ -149,6 +149,48 @@ After computing $x$ it turns out the point in the new coordinate system is as fo
 (\sqrt{2} - 1, 1,0)
 \]
 
+\newpage
+
+\subsection{Part 3}
+
+For this problem, I will assume that $y=z=0$ for my left and right eye in the world coordinate system. I will assume that both eyes are 2 cm away from the bridge of my nose. Thus the left eye has $x=-2$ and the right eye has $x=2$. Since I am looking at a computer monitor 40 cm away, I will also assume that I am looking at the point $(0,0,40)$ in the world coordinate system when estimating parameters. Here is a view from the top of my design:
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{hw1prob2drawing2.png}
+\caption{Diagram eye and monitor locations}
+\end{figure}
+We can easily specify the two translation vectors $t_{left}$ and $t_{right}$\\
+\[
+t_{left} = (2,0,0)^T
+\]
+\[
+t_{right} = (-2,0,0)^T
+\]
+\\
+We now just need the two rotation matrices $R_{left}$ and $R_{right}$ to finish estimating extrinsic parameters. \\
+The right eye will rotate counter-clockwise by $\theta$ to look at the center point. The left will rotate clockwise by the same amount, so it will rotate by $-\theta$. Thus $R_{right}$ will be the following:
+\[ \left( \begin{array}{ccc}
+cos(\theta) & sin(\theta) & 0  \\
+-sin(\theta) & cos(\theta) & 0 \\
+0 & 0 & 1
+ \end{array} \right)\]
+$R_{left}$ will be the following:
+\[ \left( \begin{array}{ccc}
+cos(\theta) & -sin(\theta) & 0  \\
+sin(\theta) & cos(\theta) & 0 \\
+0 & 0 & 1
+ \end{array} \right)\]
+From the diagram you can tell that 
+\[
+sin(\theta) = \frac{1}{\sqrt{401}} \approx 0.04993
+\]
+\[
+cos(\theta)=\frac{20}{\sqrt{401}} \approx 0.99875
+\]
+
+\newpage
+
+
 \section{Problem 3}
 
 Here is my calibrate.m function
