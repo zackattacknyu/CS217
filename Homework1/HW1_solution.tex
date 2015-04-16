@@ -199,17 +199,34 @@ This is the resulting plot:
 \caption{Sum of Squared Errors as function of amount of noise inserted}
 \end{figure}
 
+\newpage
+
 \subsection{Part 5}
 
 In order to see how sensitive each of these were, I ran 50 tests for each part A to D and each test had a random variation of that specific camera parameter. I looked at the error for each test and averaged the errors together. These were my results:\\
 \\
-\begin{tabular}{ c | c }
+\begin{tabular}{ r |l }
 Parameter changed & Average Sum of Squared Errors\\
   \hline                       
-  1 & 2  \\
-  4 & 5 \\
-  7 & 8 \\
+  Camera Center & 403.8366  \\
+  Focal Length & 19.56 \\
+  Camera Location & 4.1943e4 \\
+  Rotation Angle & 2.34e6
 \end{tabular}
+\\
+\\
+As it turns out, the greatest amount of error comes from varying the rotation angle. \\
+\\
+Instead of specifying specific units and the amounts for those units, we should be specifying the percent error possible in the camera parameters. \\
+\\
+For Camera Center, we would specify a percentage of the image plane that the center could vary by\\
+For Focal Length, we would specify a percentage of the focal length that the camera could vary by\\
+For Camera Location, we would look at the range of $x,y,z$ values in the real woord coordinate system. You would then specify a percentage and the amount in each dimension that the camera location is allowed to vary by would be a percentage of the range found.\\
+\\
+For Rotation Angle, we could still specify a number of degrees since that is a fixed percentage of the allowed range of angles.\\
+\\
+Here is the code I used to generate the numbers above. The beginning of it generated x, xL, and xR.
+\lstinputlisting[firstline=49, lastline=142]{prob2part5.m}
 
 \newpage
 
