@@ -104,5 +104,20 @@ xRnoisy3 = xR + 0.1*randn(size(xR));
 camLtest3 = calibrate(X,xLnoisy3);
 camRtest3 = calibrate(X,xRnoisy3);
 
+%%
+camL.K
+camLtest1.K
+camLtest2.K
+camLtest3.K
+
+%%
+camL.R
+camLtest1.R
+camLtest2.R
+camLtest3.R
+
+%%
+[camL.t camLtest1.t camLtest2.t camLtest3.t]
+
 
 

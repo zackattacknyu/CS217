@@ -161,7 +161,59 @@ I used the following code to generate the data set and then test the calibrate f
 All of the differences ended up being trivial and were likely due to floating point error, thus the function itself works very well. \\
 \\
 I then introduced noise as was done in the function. I used the noisy pixel locations and kept the original 3D locations to see what camera parameters were obtained. The original script used a noise factor of 0.01. I decided to also use 0.02 and 0.1 as noise factors to see what increasing noise does to the parameters. Here was my script:
-\lstinputlisting[firstline=89, lastline=105]{test_calibration.m}
+\lstinputlisting[firstline=89, lastline=120]{test_calibration.m}
+
+I then compared the parameters obtained using the output. In order from original $K$ matrix to the recovered K matrix as it gets noisier, here are the $K$ matrices:
+\begin{verbatim}
+   100     0    50
+     0   100    50
+     0     0     1
+
+  100.0364    0.0014   49.9896
+         0  100.0330   49.9683
+         0         0    1.0000
+
+  100.0540   -0.0030   49.9785
+         0  100.0624   50.0167
+         0         0    1.0000
+
+   99.8103    0.0289   50.1466
+         0   99.8229   50.5030
+         0         0    1.0000
+\end{verbatim}
+
+As can be observed, the pixel magnification factors do start to vary as noise is increased but not by much. The pixel center location also starts to vary, but not by much. The skew factor however becomes non-zero suggesting that it appears there is skew in the lens when there is noise. 
+\newpage
+Doing the same thing but for the $R$ matrices, here are the rotation matrices obtained
+
+\begin{verbatim}
+    0.9998         0    0.0200
+         0    1.0000         0
+   -0.0200         0    0.9998
+
+    0.9998    0.0000    0.0199
+   -0.0000    1.0000   -0.0003
+   -0.0199    0.0003    0.9998
+
+    0.9998   -0.0000    0.0199
+    0.0000    1.0000    0.0000
+   -0.0199   -0.0000    0.9998
+
+    0.9998    0.0002    0.0207
+   -0.0002    1.0000    0.0033
+   -0.0207   -0.0033    0.9998
+\end{verbatim}
+As can be observed, the rotation matrix does start to vary from the original but not by too much as the pixel locations get noisier. \\
+\\
+Lastly, I compared the camera location parameter t. Since it was a vector, I lined by the vectors obtained in order from left to right by amount of noise in test. This was the result:
+
+\begin{verbatim}
+   -0.2000   -0.1991   -0.1999   -0.1965
+         0    0.0002    0.0014    0.0017
+         0   -0.0008    0.0019   -0.0305
+\end{verbatim} 
+
+The camera location parameter obtained does start to increasingly vary as noise increases. Again though, the small amount of noise we introduced did not change it a whole lot. 
 
 \end{document}
 
