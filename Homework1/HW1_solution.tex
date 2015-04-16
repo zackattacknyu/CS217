@@ -312,6 +312,29 @@ As it turns out, performing the SVD on our matrix fails to find the proper vecto
 \\
 The linear dependence comes from the fact that we have a plane in 3D. Thus we can place the image plane wherever we want and then find the other camera parameters. Likewise, we can place the camera wherever we want and then come up with a proper image plane. 
 
+\subsection{Part 3}
+
+After running the program on the first image, it was able to extract these grid points:
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{prob3plot1.png}
+\caption{Results for Image 1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{prob3plot2.png}
+\caption{Results for Image 1}
+\end{figure}
+After specifying everything, it output the following result:
+\begin{verbatim}
+Translation vector: Tc_ext = [ -118.951269 	 84.063515 	 2867.531624 ]
+Rotation vector:   omc_ext = [ -2.884724 	 -1.127688 	 0.226805 ]
+Rotation matrix:    Rc_ext = [ 0.725718 	 0.671732 	 -0.148696
+                               0.676988 	 -0.735734 	 -0.019595
+                               -0.122563 	 -0.086445 	 -0.988689 ]
+Pixel error:           err = [ 1.57895 	 1.71747 ]
+\end{verbatim}
+
 \end{document}
 
 
