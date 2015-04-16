@@ -13,11 +13,12 @@ function X = triangulate(xL,xR,camL,camR)
 %
 
 %{
-ray shooting out from left camera is R_l*(x_l,y_l,1)*z_l + t_l
-ray shooting out from right camera is R_r*(x_r,y_r,1)*z_r + t_r
+ray shooting out from left camera is (x_l,y_l,1)*z + t_l
+ray shooting out from right camera is R*(x_r,y_r,1)*z_r + t_r
+R is equal to inv(R_l)*R_r
 We need to minimize Au - t where 
-    A = [R_l*(x_l,y_l,1) -R_r*(x_r,y_r,1)]
-    u = [z_l,z_r] and t = t_r-t_l
+    A = [(x_l,y_l,1) -R*(x_r,y_r,1)]
+    u = [z,z_r] and t = t_r-t_l
 %}
 
 N = size(xL,2);
@@ -40,7 +41,12 @@ for curNum = 1:N
 
     %averages the two locations together
     locL = AmatL*u(1)+camL.t; locR = AmatR*u(2)+camR.t;
-    X(:,curNum) = mean([locL locR],2);
+    meanLoc = mean([locL locR],2);
+    
+    %rotate it back to get the final location
+    finalLoc = camL.R*meanLoc;
+    
+    X(:,curNum) = finalLoc;
     
 end
 

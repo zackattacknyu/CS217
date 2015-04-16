@@ -188,6 +188,17 @@ sin(\theta) = \frac{1}{\sqrt{401}} \approx 0.04993
 cos(\theta)=\frac{20}{\sqrt{401}} \approx 0.99875
 \]
 
+\subsection{Part 4}
+
+As it turns out, noise in the pixel locations greatly increases the error in the recovered values. As the noise increases, the error increases in almost a linear fashion. Here is the code I used to test this. The arrays X,xL, and xR are the data points from the triangulation test script of the hemisphere.
+\lstinputlisting[firstline=49, lastline=64]{prob3part4.m}
+This is the resulting plot:
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{prob3part4plot.png}
+\caption{Sum of Squared Errors as function of amount of noise inserted}
+\end{figure}
+
 \newpage
 
 
