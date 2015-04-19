@@ -38,53 +38,25 @@ fc = [ 1602.728199544142200 ; 1627.132891974834400 ];
 %-- Principal point:
 cc = [ 830.782186100948930 ; 563.592745345227400 ];
 
+%gets the modified points after considering instrinic matrix
 Kmatrix = [fc(1) 0 cc(1);0 fc(2) cc(2);0 0 1];
 invK = inv(Kmatrix);
 newX13 = invK*x13;
 newX14 = invK*x14;
 %%
+
+%uses non-linear least squares to obtain extrinsic matrix
+%   parameters are theta_1,theta_2,theta_3 as well as x,y,z
+%   the first set are the angles for the rotation matrices
+%   the second set is the translation vector
 Xhom = [X;ones(1,size(X,2))];
-Result = lsqnonlin(@(YY) part4function(YY,Xhom,newX13),[0 0 0 0 0 0]);
+Result13 = lsqnonlin(@(YY) part4function(YY,Xhom,newX13),[0 0 0 0 0 0]);
+Result14 = lsqnonlin(@(YY) part4function(YY,Xhom,newX14),[0 0 0 0 0 0]);
 
-%%
-%camEst13 = calibrate(X,newX13);
-%camEst14 = calibrate(X,newX14);
-x = newX13;
-n = size(X,2);
-Pmatrix = [X(:,1:n);ones(1,n)];
-xVals = x(1,1:n);
-yVals = x(2,1:n);
+[Rinv,tResult] = part4Input(Result13);
+Rmatrix13 = inv(Rinv);
+tVector13 = -Rmatrix13*tResult;
 
-%assemble the A matrix as specified in the slides
-A = zeros(2*n,12);
-for i = 1:n
-   PiT = transpose(Pmatrix(:,i));
-   start = 2*i-1;
-   A(start:start+1,:) = ...
-       [0 0 0 0 -PiT PiT.*yVals(i);...
-       PiT 0 0 0 0 PiT.*(-xVals(i))];
-end
-
-%calibration is the last column of V in the SVD
-[U,S,V] = svd(A);
-calib = V(:,end);
-%%
-%make the matrix have uniform scale
-calib = calib./calib(12);
-cam.C = (reshape(calib,[4 3]))';
-
-translationCol = cam.C(:,4);
-mainMat = cam.C(:,1:3);
-[Kmat,Rinv] = rq(mainMat);
-
-%normalizes by last entry
-KmatNorm = Kmat./Kmat(9);
-cam.K = KmatNorm;
-cam.m = [KmatNorm(1,1);KmatNorm(2,2)];
-cam.f = 1;
-cam.c = [KmatNorm(1,3);KmatNorm(2,3)];
-
-%gets rotation
-Rmat = -inv(Rinv);
-cam.R = Rmat;
-cam.t = Rmat*inv(Kmat)*translationCol;
+[Rinv,tResult] = part4Input(Result14);
+Rmatrix14 = inv(Rinv);
+tVector14 = -Rmatrix14*tResult;
