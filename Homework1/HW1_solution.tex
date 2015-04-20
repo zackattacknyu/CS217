@@ -312,7 +312,7 @@ All of the code for this part is included in the file prob3part1.m in the code f
 
 \subsection*{Part 2}
 
-This is the code I used to test it on image 1:
+This is the code I used to test it on image 1. It is in the code folder as prob3part2.m:
 \lstinputlisting[firstline=1, lastline=21]{prob3part2.m}
 I ended up getting the following error:
 \begin{verbatim}
@@ -328,14 +328,15 @@ The linear dependence comes from the fact that we have a plane in 3D. Thus we ca
 After running the program on the first image, it was able to extract these grid points:
 \begin{figure}[H]
 \centering
-\includegraphics[height=4in]{prob3plot1.png}
+\includegraphics[height=3in]{prob3plot1.png}
 \caption{Results for Image 1}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[height=4in]{prob3plot2.png}
+\includegraphics[height=3in]{prob3plot2.png}
 \caption{Results for Image 1}
 \end{figure}
+\newpage
 I continued specifying corners for the rest of the images and these were the instrinsic parameters that resulted:
 \begin{verbatim}
 Calibration results (with uncertainties):
@@ -351,19 +352,20 @@ Pixel error:          err = [ 3.59673   2.89028 ]
 Note: The numerical errors are approximately three times the standard deviations (for reference).
 
 \end{verbatim}
+
 Here is the extrinsic matrix visual
 \begin{figure}[H]
 \centering
-\includegraphics[height=4in]{prob3plot3.png}
+\includegraphics[height=4.5in]{prob3plot3.png}
 \caption{Extrinsic parameters with single camera}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[height=4in]{prob3plot4.png}
+\includegraphics[height=5in]{prob3plot4.png}
 \caption{Extrinsic parameters with world viewpoint}
 \end{figure}
 
-When running this program, it ran through all the images and thus had many more points to use. Some of the differences that occured were likely the result of how the data was brought into the program. In some of the images, the grid corners were not very accurate whereas in other ones they were quite accurate. Also, the program labelled X and Y somewhat arbitrarily.
+When running this program, it ran through all the images and thus had many more points to use. Some of the differences that occured were likely the result of how the data was brought into the program. In some of the images, the grid corners were not very accurate whereas in other ones they were quite accurate. Also, the program seemed to arbitrarily label X and Y. 
 
 \newpage
 
@@ -379,8 +381,8 @@ height = 0.6473\\
 \includegraphics[height=4in]{hw1prob3diagram.png}
 \caption{The points used to acquire dimensions}
 \end{figure}
-
-Here is the matlab code used to get the dimensions
+\newpage
+Here is the matlab code used to get the dimensions. It is attached in the code folder as prob3part4.m.
 \lstinputlisting[firstline=1, lastline=97]{prob3part4.m}
 
 \end{document}
