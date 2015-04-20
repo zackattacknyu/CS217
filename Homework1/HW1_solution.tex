@@ -71,12 +71,14 @@ Cancelling the term $y+y'$ we end up with
 This is the thin lens equation
 
 
-\section{Problem 2}
+\section*{Problem 2}
 
-Here is my triangulate.m function
+Here is my triangulate.m function. It is also attached in the code folder. After running testtriangulation.m, the points matched almost exactly before noise was added and they were quite close after the noise was added.
 \lstinputlisting[firstline=1, lastline=54]{triangulate.m}
 
-\subsection{Part 1}
+\newpage
+
+\subsection*{Part 1}
 
 The following diagram illustrates the cross-section showing the horizontal and vertical field of view along with the focal length. The field of view will be $2\theta$
 
@@ -85,12 +87,11 @@ The following diagram illustrates the cross-section showing the horizontal and v
 \includegraphics[height=4in]{hw1prob2drawing1.png}
 \caption{Diagram of focal length and horizontal/vertical field of view}
 \end{figure}
-
+\newpage
 Using trigonometry, it is easily observed that
 \[
 \theta = arctan(\frac{x}{20f})
 \]
-\newpage
 For the horizontal field of view, $x=640$\\
 For the vertical field of view, $x=480$ \\
 \\
@@ -114,7 +115,7 @@ The vertical field of view (in degrees) is as follows:
 
 \newpage
 
-\subsection{Part 2}
+\subsection*{Part 2}
 
 A rotation of $\theta$ about the y axis has the following form
 \[ \left( \begin{array}{ccc}
@@ -154,7 +155,7 @@ After computing $x$ it turns out the point in the new coordinate system is as fo
 
 \newpage
 
-\subsection{Part 3}
+\subsection*{Part 3}
 
 For this problem, I will assume that $y=z=0$ for my left and right eye in the world coordinate system. I will assume that both eyes are 2 cm away from the bridge of my nose. Thus the left eye has $x=-2$ and the right eye has $x=2$. Since I am looking at a computer monitor 40 cm away, I will also assume that I am looking at the point $(0,0,40)$ in the world coordinate system when estimating parameters. Here is a view from the top of my design:
 \begin{figure}[H]
@@ -170,8 +171,11 @@ t_{left} = (2,0,0)^T
 t_{right} = (-2,0,0)^T
 \]
 \\
-We now just need the two rotation matrices $R_{left}$ and $R_{right}$ to finish estimating extrinsic parameters. \\
-The right eye will rotate counter-clockwise by $\theta$ to look at the center point. The left will rotate clockwise by the same amount, so it will rotate by $-\theta$. Thus $R_{right}$ will be the following:
+We now just need the two rotation matrices $R_{left}$ and $R_{right}$ to finish estimating extrinsic parameters. 
+\newpage
+The right eye will rotate counter-clockwise by $\theta$ to look at the center point. The left will rotate clockwise by the same amount, so it will rotate by $-\theta$.\\
+\\
+$R_{right}$ will be the following:
 \[ \left( \begin{array}{ccc}
 cos(\theta) & sin(\theta) & 0  \\
 -sin(\theta) & cos(\theta) & 0 \\
@@ -190,21 +194,21 @@ sin(\theta) = \frac{1}{\sqrt{401}} \approx 0.04993
 \[
 cos(\theta)=\frac{20}{\sqrt{401}} \approx 0.99875
 \]
+\newpage
+\subsection*{Part 4}
 
-\subsection{Part 4}
-
-As it turns out, noise in the pixel locations greatly increases the error in the recovered values. As the noise increases, the error increases in almost a linear fashion. Here is the code I used to test this. The arrays X,xL, and xR are the data points from the triangulation test script of the hemisphere.
+As it turns out, noise in the pixel locations greatly increases the error in the recovered values. As the noise increases, the error increases in almost a linear fashion. Here is the code I used to test this. The arrays X,xL, and xR are the data points from the triangulation test script of the hemisphere. This code is also in the code folder as prob2part4.m.
 \lstinputlisting[firstline=49, lastline=64]{prob2part4.m}
 This is the resulting plot:
 \begin{figure}[H]
 \centering
-\includegraphics[height=4in]{prob2part4plot.png}
+\includegraphics[height=3in]{prob2part4plot.png}
 \caption{Sum of Squared Errors as function of amount of noise inserted}
 \end{figure}
 
 \newpage
 
-\subsection{Part 5}
+\subsection*{Part 5}
 
 In order to see how sensitive each of these were, I ran 50 tests for each part A to D and each test had a random variation of that specific camera parameter. I looked at the error for each test and averaged the errors together. These were my results:\\
 \\
@@ -228,20 +232,20 @@ For Camera Location, we would look at the range of $x,y,z$ values in the real wo
 \\
 For Rotation Angle, we could still specify a number of degrees since that is a fixed percentage of the allowed range of angles.\\
 \\
-Here is the code I used to generate the numbers above. The beginning of it generated x, xL, and xR.
+Here is the code I used to generate the numbers above. The beginning of it generated x, xL, and xR. The code is also in the code folder as prob2part5.m.
 \lstinputlisting[firstline=49, lastline=142]{prob2part5.m}
 
 \newpage
 
 
-\section{Problem 3}
+\section*{Problem 3}
 
-Here is my calibrate.m function
+Here is my calibrate.m function. It is also in the code folder. 
 \lstinputlisting[firstline=1, lastline=55]{calibrate.m}
-It uses the function rq.m that I found on the internet and was written by a professor at NYU
+It uses the function rq.m that I found on the internet and was written by a professor at NYU. That function is also in the code folder.
 \lstinputlisting[firstline=1, lastline=27]{rq.m}
 
-\subsection{Part 1}
+\subsection*{Part 1}
 
 I used the following code to generate the data set and then test the calibrate function:
 \lstinputlisting[firstline=1, lastline=85]{test_calibration.m}
@@ -300,9 +304,13 @@ Lastly, I compared the camera location parameter t. Since it was a vector, I lin
          0   -0.0008    0.0019   -0.0305
 \end{verbatim} 
 
-The camera location parameter obtained does start to increasingly vary as noise increases. Again though, the small amount of noise we introduced did not change it a whole lot. 
+The camera location parameter obtained does start to increasingly vary as noise increases. Again though, the small amount of noise we introduced did not change it a whole lot. \\
+\\
+All of the code for this part is included in the file prob3part1.m in the code folder. 
 
-\subsection{Part 2}
+\newpage
+
+\subsection*{Part 2}
 
 This is the code I used to test it on image 1:
 \lstinputlisting[firstline=1, lastline=21]{prob3part2.m}
@@ -315,7 +323,7 @@ As it turns out, performing the SVD on our matrix fails to find the proper vecto
 \\
 The linear dependence comes from the fact that we have a plane in 3D. Thus we can place the image plane wherever we want and then find the other camera parameters. Likewise, we can place the camera wherever we want and then come up with a proper image plane. 
 
-\subsection{Part 3}
+\subsection*{Part 3}
 
 After running the program on the first image, it was able to extract these grid points:
 \begin{figure}[H]
@@ -359,7 +367,7 @@ When running this program, it ran through all the images and thus had many more 
 
 \newpage
 
-\subsection{Part 4}
+\subsection*{Part 4}
 
 Here are my estimated dimensions:\\
 length = 15.0212\\
