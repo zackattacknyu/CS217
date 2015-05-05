@@ -4,3 +4,7 @@
 *.log
 /*.asv
 /*.synctex.gz
+/vlfeat-0.9.20-bin.tar.gz
+/vlfeat-0.9.20/
+*.9.20-bin.tar
+/pax_global_header
