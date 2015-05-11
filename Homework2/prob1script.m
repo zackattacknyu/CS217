@@ -24,32 +24,25 @@ doubleImage = [I1 I2];
 figure
 imagesc(doubleImage);
 colormap bone;
+
+%plots the results for the left image
 h1 = vl_plotframe(f1(:,sel1)) ;
 h2 = vl_plotframe(f1(:,sel1)) ;
 set(h1,'color','k','linewidth',3) ;
 set(h2,'color','y','linewidth',2) ;
 h3 = vl_plotsiftdescriptor(d1(:,sel1),f1(:,sel1)) ;
 set(h3,'color','g') ;
-%%
-figure
-imagesc(I1);
-colormap bone;
-h1 = vl_plotframe(f1(:,sel1)) ;
-h2 = vl_plotframe(f1(:,sel1)) ;
+
+%plots the results for the right image
+width = size(I1,2);
+f2Original = f2(:,sel2);
+f2Offset = repmat([width;0;0;0],1,50);
+f2New = f2Original+f2Offset;
+h1 = vl_plotframe(f2New) ;
+h2 = vl_plotframe(f2New) ;
 set(h1,'color','k','linewidth',3) ;
 set(h2,'color','y','linewidth',2) ;
-%%
-h3 = vl_plotsiftdescriptor(d1(:,sel1),f1(:,sel1)) ;
-set(h3,'color','g') ;
-%%
-figure
-imagesc(I2);
-colormap bone;
-h1 = vl_plotframe(f2(:,sel2)) ;
-h2 = vl_plotframe(f2(:,sel2)) ;
-set(h1,'color','k','linewidth',3) ;
-set(h2,'color','y','linewidth',2) ;
-h3 = vl_plotsiftdescriptor(d2(:,sel2),f2(:,sel2)) ;
+h3 = vl_plotsiftdescriptor(d2(:,sel2),f2New) ;
 set(h3,'color','g') ;
 
 %%
