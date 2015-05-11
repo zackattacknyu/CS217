@@ -51,7 +51,7 @@ The following are examples of running the SIFT matching code on my own objects
 
 \subsection*{Squirtle Example}
 
-Figure \ref{squirtleOriginal} shows the original pictures that I took of a stuffed Pokemon named Squirtle. 
+Figure \ref{sq1} shows the original pictures that I took of a stuffed Pokemon named Squirtle. Figure \ref{sq2} show 50 random points found by running SIFT. Figure \ref{sq3} shows some of the matches found using SIFT. 
 
 \begin{figure}
         \centering
@@ -64,13 +64,21 @@ Figure \ref{squirtleOriginal} shows the original pictures that I took of a stuff
                 \caption{Right Image}
         \end{subfigure}
         \caption{Original Pictures of Stuffed Squirtle}
-        \label{squirtleOriginal}
+        \label{sq1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=4in]{squirtle_pointsWoMatching.png}
+\includegraphics[height=3.5in]{squirtle_pointsWoMatching.png}
 \caption{Squirtle Images With Points Marked}
+\label{sq2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{squirtle_pointsWithMatching.png}
+\caption{Squirtle Images With Points Marked and Some Matches Shown}
+\label{sq3}
 \end{figure}
 
 %\lstinputlisting[firstline=1, lastline=54]{triangulate.m}
