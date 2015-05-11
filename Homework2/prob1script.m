@@ -77,7 +77,7 @@ set(h1,'color','k','linewidth',3) ;
 set(h2,'color','y','linewidth',2) ;
 h3 = vl_plotsiftdescriptor(d2(:,sel2),f2New) ;
 set(h3,'color','g') ;
-
+%%
 hold on
 for i = 1:size(image1Points,2)
    Xvals = [image1Points(1,i) image2Points(1,i)+width];

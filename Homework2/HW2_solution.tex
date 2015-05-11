@@ -4,6 +4,9 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \newcount\refno\refno=1
 \def\ref{\the\refno \global\advance\refno by 1}
@@ -44,14 +47,31 @@
 
 \section*{Problem 1}
 
-Using our assumptions about lenses, we have the following diagram:
+The following are examples of running the SIFT matching code on my own objects
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[height=4in]{hw1prob1diagram.png}
-%\caption{Diagram of lens and its focal length}
-%\end{figure}
+\subsection*{Squirtle Example}
 
+Figure \ref{squirtleOriginal} shows the original pictures that I took of a stuffed Pokemon named Squirtle. 
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{squirtle1.jpg}
+		\caption{Left Image}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{squirtle2.jpg}
+                \caption{Right Image}
+        \end{subfigure}
+        \caption{Original Pictures of Stuffed Squirtle}
+        \label{squirtleOriginal}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{squirtle_pointsWoMatching.png}
+\caption{Squirtle Images With Points Marked}
+\end{figure}
 
 %\lstinputlisting[firstline=1, lastline=54]{triangulate.m}
 
