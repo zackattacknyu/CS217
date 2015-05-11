@@ -34,14 +34,15 @@ load('squirtlePts.mat');
 %%
 
 
+numInitPts = 8;
 randIndices = randperm(size(X1,1));
-eightPtsIndices = randIndices(1:8);
+eightPtsIndices = randIndices(1:numInitPts);
 
 
 %taken from paper "In Defense of the Eight Point Algorithm"
 %   section 2.2
-equMatrix = ones(8,9);
-for j = 1:8
+equMatrix = ones(numInitPts,9);
+for j = 1:numInitPts
     
     i = eightPtsIndices(j);
     %If (u,v,1) and (u',v',1) are the pts, then this row should be:
@@ -53,6 +54,10 @@ end
 
 vecs = null(equMatrix);
 ff = vecs./norm(vecs);
+
+[U,S,V] = svd(equMatrix);
+calib = V(:,end);
+ff2 = calib./norm(calib);
 
 %%
 fMatrix = reshape(ff,[3 3]);
