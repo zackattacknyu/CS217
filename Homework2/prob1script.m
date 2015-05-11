@@ -1,5 +1,7 @@
 %specify the image in the folder
-imageName = 'book';
+%imageName = 'squirtle';
+%imageName = 'book';
+imageName = 'coffeeCan';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 
@@ -75,7 +77,7 @@ set(h1,'color','k','linewidth',3) ;
 set(h2,'color','y','linewidth',2) ;
 h3 = vl_plotsiftdescriptor(d2(:,sel2),f2New) ;
 set(h3,'color','g') ;
-%%
+
 %plots the matches for the visualized points in each image
 hold on
 for i = 1:size(image1Points,2)
