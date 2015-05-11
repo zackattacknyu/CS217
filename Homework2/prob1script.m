@@ -20,33 +20,6 @@ sel1 = perm(1:50) ;
 perm = randperm(size(f2,2)) ;
 sel2 = perm(1:50) ;
 
-doubleImage = [I1 I2];
-figure
-imagesc(doubleImage);
-colormap bone;
-
-%plots the results for the left image
-h1 = vl_plotframe(f1(:,sel1)) ;
-h2 = vl_plotframe(f1(:,sel1)) ;
-set(h1,'color','k','linewidth',3) ;
-set(h2,'color','y','linewidth',2) ;
-h3 = vl_plotsiftdescriptor(d1(:,sel1),f1(:,sel1)) ;
-set(h3,'color','g') ;
-
-%plots the results for the right image
-width = size(I1,2);
-f2Original = f2(:,sel2);
-f2Offset = repmat([width;0;0;0],1,50);
-f2New = f2Original+f2Offset;
-h1 = vl_plotframe(f2New) ;
-h2 = vl_plotframe(f2New) ;
-set(h1,'color','k','linewidth',3) ;
-set(h2,'color','y','linewidth',2) ;
-h3 = vl_plotsiftdescriptor(d2(:,sel2),f2New) ;
-set(h3,'color','g') ;
-
-%%
-
 %does basic matching
 [matches, scores] = vl_ubcmatch(d1, d2) ;
 
@@ -78,4 +51,36 @@ for i = 1:numPoints
        img1MatchingIndex = matches(1,colNum);
        image1Points = [image1Points f1(1:2,img1MatchingIndex)];
     end
+end
+%%
+doubleImage = [I1 I2];
+figure
+imagesc(doubleImage);
+colormap bone;
+
+%plots the results for the left image
+h1 = vl_plotframe(f1(:,sel1)) ;
+h2 = vl_plotframe(f1(:,sel1)) ;
+set(h1,'color','k','linewidth',3) ;
+set(h2,'color','y','linewidth',2) ;
+h3 = vl_plotsiftdescriptor(d1(:,sel1),f1(:,sel1)) ;
+set(h3,'color','g') ;
+
+%plots the results for the right image
+width = size(I1,2);
+f2Original = f2(:,sel2);
+f2Offset = repmat([width;0;0;0],1,50);
+f2New = f2Original+f2Offset;
+h1 = vl_plotframe(f2New) ;
+h2 = vl_plotframe(f2New) ;
+set(h1,'color','k','linewidth',3) ;
+set(h2,'color','y','linewidth',2) ;
+h3 = vl_plotsiftdescriptor(d2(:,sel2),f2New) ;
+set(h3,'color','g') ;
+
+hold on
+for i = 1:size(image1Points,2)
+   Xvals = [image1Points(1,i) image2Points(1,i)+width];
+   Yvals = [image1Points(2,i) image2Points(2,i)];
+   plot(Xvals,Yvals);
 end
