@@ -30,4 +30,41 @@ colormap bone;
 %%
 save('squirtlePts.mat','X1','X2','Y1','Y2','-v7.3');
 %%
+load('squirtlePts.mat');
+%%
+
+
+randIndices = randperm(size(X1,1));
+eightPtsIndices = randIndices(1:8);
+
+
+%taken from paper "In Defense of the Eight Point Algorithm"
+%   section 2.2
+equMatrix = ones(8,9);
+for j = 1:8
+    
+    i = eightPtsIndices(j);
+    %If (u,v,1) and (u',v',1) are the pts, then this row should be:
+    %(uu', uv', u, vu', vv', v, u', v', 1)
+    equMatrix(j,:) = [X1(i)*X2(i) X1(i)*Y2(i) X1(i) ...
+        Y1(i)*X2(i) Y1(i)*Y2(i) Y1(i)...
+        X2(i) Y2(i) 1]; 
+end
+
+vecs = null(equMatrix);
+ff = vecs./norm(vecs);
+
+%%
+fMatrix = reshape(ff,[3 3]);
+
+%%
+otherIndices = randIndices(9:size(X1,1));
+numOthers = length(otherIndices);
+vals = zeros(1,numOthers);
+for k = 1:numOthers
+    index = otherIndices(k);
+    img1Vec = [X1(index) Y1(index) 1];
+    img2Vec = [X2(index);Y2(index);1];
+    vals(k) = img1Vec*fMatrix*img2Vec;
+end
 
