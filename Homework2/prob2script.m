@@ -49,7 +49,8 @@ ff = vecs./norm(vecs);
 fMatrix = reshape(ff,[3 3]);
 
 %performs iterations of RANSAC
-threshold = 0.45;
+threshold = 0.45; %for squirtle
+%threshold = 0.6; %for book
 for iter=1:numIter
     
     %figures out the inlier and outlier indices
