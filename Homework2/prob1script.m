@@ -2,9 +2,10 @@
 
 %%
 
-image1 = 'squirtle1.JPG';
-image2 = 'squirtle2.JPG';
-
+imageName = 'squirtle';
+image1 = strcat(imageName,'1.JPG');
+image2 = strcat(imageName,'2.JPG');
+%%
 %visualizes points
 I1 = imread(image1);
 I1 = single(rgb2gray(I1));
