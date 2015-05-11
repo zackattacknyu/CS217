@@ -5,7 +5,7 @@
 imageName = 'squirtle';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
-%%
+
 %visualizes points
 I1 = imread(image1);
 I1 = single(rgb2gray(I1));
@@ -19,7 +19,6 @@ perm = randperm(size(f1,2)) ;
 sel1 = perm(1:50) ;
 perm = randperm(size(f2,2)) ;
 sel2 = perm(1:50) ;
-%%
 
 doubleImage = [I1 I2];
 figure
@@ -49,10 +48,34 @@ set(h3,'color','g') ;
 %%
 
 %does basic matching
-Ia = imread('squirtle1.JPG');
-Ia = single(rgb2gray(Ia));
-Ib = imread('squirtle2.JPG');
-Ib = single(rgb2gray(Ib));
-[fa, da] = vl_sift(Ia) ;
-[fb, db] = vl_sift(Ib) ;
-[matches, scores] = vl_ubcmatch(da, db) ;
+[matches, scores] = vl_ubcmatch(d1, d2) ;
+
+%%
+image1matches = matches(1,:);
+image2matches = matches(2,:);
+
+numPoints = size(sel1,2);
+image1Points = [];
+image2Points = [];
+for i = 1:numPoints
+    matchingCol = find(image1matches==sel1(i));
+    if(~isempty(matchingCol))
+       colNum = matchingCol(1);
+       image1index = matches(1,colNum);
+       image1Points = [image1Points f1(1:2,image1index)];
+       img2MatchingIndex = matches(2,colNum);
+       image2Points = [image2Points f2(1:2,img2MatchingIndex)];
+    end
+end
+
+numPoints = size(sel2,2);
+for i = 1:numPoints
+    matchingCol = find(image2matches==sel2(i));
+    if(~isempty(matchingCol))
+       colNum = matchingCol(1);
+       image2index = matches(2,colNum);
+       image2Points = [image2Points f2(1:2,image2index)];
+       img1MatchingIndex = matches(1,colNum);
+       image1Points = [image1Points f1(1:2,img1MatchingIndex)];
+    end
+end
