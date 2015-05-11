@@ -15,7 +15,7 @@ http://www.cb.uu.se/~aht/code.html
 
 
 %gets image points
-imageName = 'book';
+imageName = 'coffeeCan';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 I1 = imread(image2);
@@ -28,13 +28,16 @@ colormap bone;
 
 
 %%
-save('bookPts.mat','X1','X2','Y1','Y2','-v7.3');
+save('coffeeCanPts.mat','X1','X2','Y1','Y2','-v7.3');
 %%
 load('squirtlePts.mat');
 
 %%
 
 load('bookPts.mat');
+
+%%
+load('coffeeCanPts.mat');
 %%
 
 numIter=3;
@@ -49,8 +52,9 @@ ff = vecs./norm(vecs);
 fMatrix = reshape(ff,[3 3]);
 
 %performs iterations of RANSAC
-threshold = 0.45; %for squirtle
+%threshold = 0.45; %for squirtle
 %threshold = 0.6; %for book
+threshold = 0.5; %for coffee can
 for iter=1:numIter
     
     %figures out the inlier and outlier indices
