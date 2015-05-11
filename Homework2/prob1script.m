@@ -1,3 +1,10 @@
+%{
+This is the script used for problem 1. 
+
+Much of the code was inspired by the tutorial here:
+http://www.vlfeat.org/overview/sift.html
+%}
+
 %specify the image in the folder
 %imageName = 'squirtle';
 %imageName = 'book';
@@ -51,7 +58,7 @@ for i = 1:numPoints
        image1Points = [image1Points f1(1:2,img1MatchingIndex)];
     end
 end
-%%
+
 %plots the left and right image side-by-side
 doubleImage = [I1 I2];
 figure
