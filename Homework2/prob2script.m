@@ -11,3 +11,23 @@ http://www.cb.uu.se/~aht/code.html
 
 
 %}
+
+%{
+
+%gets image points
+imageName = 'squirtle';
+image1 = strcat(imageName,'1.JPG');
+image2 = strcat(imageName,'2.JPG');
+I1 = imread(image2);
+I1 = single(rgb2gray(I1));
+figure(1)
+curImg = imagesc(I1)
+colormap bone;
+[X Y] = getpts(1);
+
+%}
+
+%%
+save('squirtlePts.mat','X1','X2','Y1','Y2','-v7.3');
+%%
+
