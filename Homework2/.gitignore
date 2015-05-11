@@ -1,2 +1,5 @@
 *.pdf
 *.asv
+/vlfeat-0.9.20/
+/pax_global_header
+/*.9.20-bin.tar.gz
