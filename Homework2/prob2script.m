@@ -40,7 +40,7 @@ load('bookPts.mat');
 load('coffeeCanPts.mat');
 %%
 
-numIter=3;
+numIter=5;
 
 %gets an initial randomly sampled set
 numInitPts = 8;
@@ -77,6 +77,34 @@ for iter=1:numIter
     calib = V(:,end);
     ff2 = calib./norm(calib);
     fMatrix = reshape(ff2,[3 3]);
+end
+
+%%
+
+%imageName = 'squirtle';
+imageName = 'coffeeCan';
+%imageName = 'book';
+image1 = strcat(imageName,'1.JPG');
+image2 = strcat(imageName,'2.JPG');
+I1 = imread(image1);
+I2 = imread(image2);
+I1 = single(rgb2gray(I1));
+I2 = single(rgb2gray(I2));
+width = size(I1,2);
+
+%plots the left and right image side-by-side
+doubleImage = [I1 I2];
+figure
+imagesc(doubleImage);
+colormap bone;
+
+%plots the matches for the visualized points in each image
+hold on
+for i = 1:size(inlierIndices,2)
+    index = inlierIndices(i);
+   Xvals = [X1(index) X2(index)+width];
+   Yvals = [Y1(index) Y2(index)];
+   plot(Xvals,Yvals);
 end
 
 
