@@ -81,8 +81,8 @@ end
 
 %%
 
-%imageName = 'squirtle';
-imageName = 'coffeeCan';
+imageName = 'squirtle';
+%imageName = 'coffeeCan';
 %imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
@@ -105,6 +105,34 @@ for i = 1:size(inlierIndices,2)
    Xvals = [X1(index) X2(index)+width];
    Yvals = [Y1(index) Y2(index)];
    plot(Xvals,Yvals);
+end
+
+%%
+
+%Plots the Epipolar lines for Part B
+randInds = randperm(size(inlierIndices,2));
+randInds = inlierIndices(randInds);
+
+doubleImage = [I1 I2];
+figure
+imagesc(doubleImage);
+colormap bone;
+
+x = linspace(0,width,100);
+
+%plots the matches for the visualized points in each image
+hold on
+colors = 'bgrcmbgrcm';
+for i = 1:10
+    index = randInds(i);
+    abcVector = fMatrix*[X2(index);Y2(index);1];
+    A = abcVector(1); B = abcVector(2); C = abcVector(3);
+    curY = -(A.*x + C)./B;
+    plot(x,curY,strcat(colors(i),'-'));
+    plot(X2(index)+width,Y2(index),strcat(colors(i),'x'));
+   %Xvals = [X1(index) X2(index)+width];
+   %Yvals = [Y1(index) Y2(index)];
+   %plot(Xvals,Yvals);
 end
 
 
