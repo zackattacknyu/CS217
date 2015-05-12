@@ -53,8 +53,8 @@ fMatrix = reshape(ff,[3 3]);
 
 %performs iterations of RANSAC
 %threshold = 0.45; %for squirtle
-%threshold = 0.6; %for book
-threshold = 0.5; %for coffee can
+threshold = 0.6; %for book
+%threshold = 0.55; %for coffee can
 for iter=1:numIter
     
     %figures out the inlier and outlier indices
@@ -81,9 +81,9 @@ end
 
 %%
 
-imageName = 'squirtle';
+%imageName = 'squirtle';
 %imageName = 'coffeeCan';
-%imageName = 'book';
+imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 I1 = imread(image1);
@@ -122,17 +122,27 @@ x = linspace(0,width,100);
 
 %plots the matches for the visualized points in each image
 hold on
-colors = 'bgrcmbgrcm';
-for i = 1:10
+colors = 'bgrcmbgrcmbgrcmbgrcm';
+for i = 1:20
     index = randInds(i);
+    
+    %gets the point in image 2 and its line in image 1
     abcVector = fMatrix*[X2(index);Y2(index);1];
     A = abcVector(1); B = abcVector(2); C = abcVector(3);
     curY = -(A.*x + C)./B;
+    
+    %gets the point in image 1 and its line in image 2
+    abcVector2 = [X1(index) Y1(index) 1]*fMatrix;
+    A2 = abcVector2(1); B2 = abcVector2(2); C2 = abcVector2(3);
+    curY2 = -(A2.*x + C2)./B2;
+    
+    %plots the lines found above
     plot(x,curY,strcat(colors(i),'-'));
+    plot(x+width,curY2,strcat(colors(i),'-'));
+    
+    %plots the points found above
+    plot(X1(index),Y1(index),strcat(colors(i),'x'));
     plot(X2(index)+width,Y2(index),strcat(colors(i),'x'));
-   %Xvals = [X1(index) X2(index)+width];
-   %Yvals = [Y1(index) Y2(index)];
-   %plot(Xvals,Yvals);
 end
 
 
