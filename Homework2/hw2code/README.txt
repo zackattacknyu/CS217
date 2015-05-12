@@ -22,3 +22,6 @@ prob2script.m is the whole script for problem 2
 prob3script.m is the whole script for problem 3
 
 The function getAmatrix.m is used in some of the problem scripts
+
+The SIFT toolbox needs to be installed for the scripts to properly run. 
+For the problem 3 script, the sfm folder needs to be in the same place as it for that script to run properly.
