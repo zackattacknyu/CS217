@@ -1,0 +1,2 @@
+8.6.1 and 8.6.2 from the epipolar book is what I used for Problem 3 in Homework 2
+Specifically, Equations 8.13 and 8.14

@@ -111,4 +111,66 @@ image2Matrix = [image2Points;ones(1,size(image2Points,2))];
 newImg1Mat = inv(K)*image1Matrix;
 newImg2Mat = inv(K)*image2Matrix;
 
+%%
+%number of iterations of RANSAC
+numIter=5;
+
+X1 = newImg1Mat(1,:);
+Y1 = newImg1Mat(2,:);
+X2 = newImg2Mat(1,:);
+Y2 = newImg2Mat(2,:);
+%%
+
+%gets an initial randomly sampled set
+numInitPts = 8;
+randIndices = randperm(size(X1,2));
+eightPtsIndices = randIndices(1:numInitPts);
+equMatrix = getAmatrix(X1,X2,Y1,Y2,eightPtsIndices);
+vecs = null(equMatrix);
+ff = vecs./norm(vecs);
+fMatrix = reshape(ff,[3 3]);
+
+%performs iterations of RANSAC
+threshold = 0.0001;
+for iter=1:numIter
+    
+    %figures out the inlier and outlier indices
+    inlierIndices = [];
+    outlierIndices = [];
+    for index = 1:size(X1,2)
+        img1Vec = [X1(index) Y1(index) 1];
+        img2Vec = [X2(index);Y2(index);1];
+        value = abs(img1Vec*fMatrix*img2Vec);
+        if(value<threshold)
+            inlierIndices = [inlierIndices index];
+        else
+            outlierIndices = [outlierIndices index];
+        end
+    end
+    
+    %recompute F based on Inlier Indices
+    equMatrix = getAmatrix(X1,X2,Y1,Y2,inlierIndices);
+    [U,S,V] = svd(equMatrix);
+    calib = V(:,end);
+    ff2 = calib./norm(calib);
+    fMatrix = reshape(ff2,[3 3]);
+end
+%%
+
+%computes rotation and translation after obtaining essential matrix 
+%       from previous code
+essMatrix = fMatrix;
+[U,S,V] = svd(essMatrix);
+Wmatrix = [0 -1 0;1 0 0;0 0 1];
+Zmatrix = transpose(Wmatrix);
+tMatrix = V*Wmatrix*S*V';
+
+%position vectors
+tVecPos = U*[0;0;1];
+tVecNeg = -tVecPos;
+
+%rotation matrices
+Rmatrix1 = U*Wmatrix*V';
+Rmatrix2 = U*Wmatrix'*V';
+
 

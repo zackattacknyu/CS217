@@ -243,6 +243,38 @@ The best way to make F more robust would have been to add more points and then s
 
 \lstinputlisting[firstline=1, lastline=148]{prob2script.m}
 
+\newpage
+
+\section*{Problem 3}
+
+After running everything, these are the two rotation matrices:
+\[ \left( \begin{array}{ccc}
+0.9920 & 0.1264 & $-3.7932e-5$\\
+-0.1264 &  0.9920 & $-9.8549e-5$\\		
+$-2.5167e-5$ & -0.0001 & -0.9999 \end{array} \right)\] 
+\[ \left( \begin{array}{ccc}
+-0.9920 & -0.1264 & $-1.1563e-4$\\
+0.1264 &  -0.9920 & $1.8543e-5$\\		
+$1.1704e-4$ & $-.7748e-6$ & -0.9999 \end{array} \right)\] 
+The two position vectors are as follows\\
+(7.6779e-5, 4.0003e-5,0.9999)
+\\
+(-7.6779e-5, -4.0003e-5,-0.9999)
+\\
+\\
+According to these results, it appears that the camera was moved back (or forward) and then rotated to make the second image. This appears consisent with what the images look like. I would have expected slightly more movement in the $x,y$ direction though based on my perception of the image, but perhaps most of the translational movement was in the z direction. That is quite possible since there are only two camera positions we are considering. Figure \ref{p3} shows the image correspondences found through SIFT that were used to compute the above matrices and vectors.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=4in]{prob3matches.png}
+\caption{Image Correspondences}
+\label{p3}
+\end{figure}
+      
+Here is the code to complete problem 3
+\lstinputlisting[firstline=1, lastline=174]{prob3script.m}     
+        
+
 \end{document}
 
 
