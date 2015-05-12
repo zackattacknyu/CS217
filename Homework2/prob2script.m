@@ -1,45 +1,29 @@
-%{
-
-For this problem, estimate the fundamental matrix
-    x'Fx
-by solving that linear equation
-
-Use RANSAC algorithm to find an inital F and then update it
-
-Code for RANSAC:
-http://www.cb.uu.se/~aht/code.html
-
-
-%}
-
-
-
-%gets image points
-imageName = 'coffeeCan';
+%This code was used to select image points to use
+%imageName = 'coffeeCan';
+%imageName = 'squirtle';
+imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 I1 = imread(image2);
+%I1 = imread(image1);
 I1 = single(rgb2gray(I1));
 figure(1)
 curImg = imagesc(I1)
 colormap bone;
+%[X1 Y1] = getpts(1);
 [X2 Y2] = getpts(1);
-
-
 
 %%
 save('coffeeCanPts.mat','X1','X2','Y1','Y2','-v7.3');
 %%
 load('squirtlePts.mat');
-
 %%
-
 load('bookPts.mat');
-
 %%
 load('coffeeCanPts.mat');
 %%
 
+%number of iterations of RANSAC
 numIter=5;
 
 %gets an initial randomly sampled set
@@ -53,8 +37,8 @@ fMatrix = reshape(ff,[3 3]);
 
 %performs iterations of RANSAC
 %threshold = 0.45; %for squirtle
-threshold = 0.6; %for book
-%threshold = 0.55; %for coffee can
+%threshold = 0.6; %for book
+threshold = 0.55; %for coffee can
 for iter=1:numIter
     
     %figures out the inlier and outlier indices
@@ -98,7 +82,7 @@ figure
 imagesc(doubleImage);
 colormap bone;
 
-%plots the matches for the visualized points in each image
+%plots the matches for the visualized points in each image for Part A
 hold on
 for i = 1:size(inlierIndices,2)
     index = inlierIndices(i);
@@ -144,5 +128,24 @@ for i = 1:20
     plot(X1(index),Y1(index),strcat(colors(i),'x'));
     plot(X2(index)+width,Y2(index),strcat(colors(i),'x'));
 end
+
+%%
+
+%This records good fMatrices for use in part C
+fMatInd = 0;
+%%
+fMatInd = fMatInd+1;
+fMatrices(fMatInd,:,:) = fMatrix;
+
+%%
+
+%calculates STD to get sense of stability
+stdMat = std(fMatrices,1);
+sumStd = sum(sum(stdMat));
+
+%for squirtle, sumStd is near zero and 4 computations of fMatrix were done
+%for book, sumStd was 0.9567 and 6 computations of fMatrix were done
+%for coffee can, sumStd was 1.0140 and 6 computations of fMatrix were done
+
 
 

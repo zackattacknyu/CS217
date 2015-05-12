@@ -227,6 +227,22 @@ With the squirtle image, the epipole for the left image lies slightly above the 
 \label{p2h}
 \end{figure}
 
+\newpage
+
+\subsection*{Part c}
+
+The estimate for F is quite stable. I decided to compute it multiple times and find the standard deviation of the entries in the F matrix. I then summed the standard deviation. \\
+\\
+For squirtle, the sum was near zero and 4 computations of the F matrix were done.\\
+For the textbook, the sum was 0.9567 and 6 computations of the F matrix were done.\\
+For the coffee can, the sum was 1.0140 and 6 computations of the F matrix were done. \\
+\\
+The best way to make F more robust would have been to add more points and then see if they correspond. With more data, the estimates get more robust. 
+
+\subsection*{Code for Problem 2}
+
+\lstinputlisting[firstline=1, lastline=148]{prob2script.m}
+
 \end{document}
 
 
