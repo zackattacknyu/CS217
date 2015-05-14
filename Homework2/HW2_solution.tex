@@ -149,21 +149,19 @@ Figure 7 shows the original pictures that I took of a coffee can. Figure 8 show 
 \label{cc3}
 \end{figure}
 
-\newpage
-
 \subsection*{Code for Problem 1}
 
-Here is the code I used for this problem
-
-\lstinputlisting[firstline=1, lastline=94]{prob1script.m}
+The code for this problem is in the folder as prob1script.m
 
 \newpage
 
 \section*{Problem 2}
 
-\subsection*{Part A}
+For problem 2, I used the same images as the previous problem and I used points chosen by myself as well as points chosen through SIFT. The first part of this write-up shows the results when I used my own parts. The second part of the write up shows the results when I used the points found through SIFT. As it turns out, the points found using SIFT gave much better results. 
 
-For problem 2, I used the same images as the previous problem but I chose my own points. Figures 10, 11, and 12 show the points that I chose in each image. After running my own implementation of RANSAC, I got the correspondences that are shown in figures 13, 14, and 15.
+\subsection*{Part A, My Points}
+
+Figures 10, 11, and 12 show the points that I chose in each image. After running my own implementation of RANSAC, I got the correspondences that are shown in figures 13, 14, and 15.
 
 \begin{figure}[H]
 \centering
@@ -209,7 +207,7 @@ For problem 2, I used the same images as the previous problem but I chose my own
 
 \newpage
 
-\subsection*{Part b}
+\subsection*{Part B, My Points}
 
 With the squirtle image, the epipole for the left image lies slightly above the epipole for the right image, suggesting that the left image was taken from a slightly raised viewpoint as compared to the right image. With the coffee can image, the epipole of the left image is below the epipole for right image, suggesting that it was taken from a lowered viewpoint. 
 
@@ -229,7 +227,85 @@ With the squirtle image, the epipole for the left image lies slightly above the 
 
 \newpage
 
-\subsection*{Part c}
+\subsection*{Part C, My Points}
+
+The estimate for F is quite stable. I decided to compute it multiple times and find the standard deviation of the entries in the F matrix. I then summed the standard deviation. \\
+\\
+For squirtle, the sum was near zero and 4 computations of the F matrix were done.\\
+For the textbook, the sum was 0.9567 and 6 computations of the F matrix were done.\\
+For the coffee can, the sum was 1.0140 and 6 computations of the F matrix were done. \\
+\\
+The best way to make F more robust would have been to add more points and then see if they correspond. With more data, the estimates get more robust. 
+
+\subsection*{Part A, SIFT points}
+
+Figures 10, 11, and 12 show the points that I chose in each image. After running my own implementation of RANSAC, I got the correspondences that are shown in figures 13, 14, and 15.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=7in]{squirtle_prob2Points2.png}
+\caption{Squirtle Image with Points Marked}
+\label{p2a}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=7in]{book_prob2Points2.png}
+\caption{Textbook Image with Points Marked}
+\label{p2b}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=7in]{coffeeCan_prob2Points.png}
+\caption{Coffee Can Image with Points Marked}
+\label{p2c}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=5in]{squirtle_prob2Matches2.png}
+\caption{Squirtle Images with matching points}
+\label{p2d}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=5in]{book_prob2Matches2.png}
+\caption{Textbook Images with matching points}
+\label{p2e}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=5in]{coffeeCan_prob2Matches2.png}
+\caption{Coffee Can Images with matching points}
+\label{p2f}
+\end{figure}
+
+\newpage
+
+\subsection*{Part B, SIFT points}
+
+With the squirtle image, the epipole for the left image lies slightly above the epipole for the right image, suggesting that the left image was taken from a slightly raised viewpoint as compared to the right image. With the coffee can image, the epipole of the left image is below the epipole for right image, suggesting that it was taken from a lowered viewpoint. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{squirtle_prob2Epipolar.png}
+\caption{Squirtle Image with Epipolar Lines and their points}
+\label{p2g}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{coffeeCan_prob2Epipolar.png}
+\caption{Coffee Can Image with Epipolar Lines and their points}
+\label{p2h}
+\end{figure}
+
+\newpage
+
+\subsection*{Part C, SIFT points}
 
 The estimate for F is quite stable. I decided to compute it multiple times and find the standard deviation of the entries in the F matrix. I then summed the standard deviation. \\
 \\
@@ -241,7 +317,7 @@ The best way to make F more robust would have been to add more points and then s
 
 \subsection*{Code for Problem 2}
 
-\lstinputlisting[firstline=1, lastline=148]{prob2script.m}
+The code for this problem is attached as prob2script.m
 
 \newpage
 
@@ -271,8 +347,7 @@ According to these results, it appears that the camera was moved back (or forwar
 \label{p3}
 \end{figure}
       
-Here is the code to complete problem 3
-\lstinputlisting[firstline=1, lastline=174]{prob3script.m}     
+The code to complete the problem is attached as prob3script.m   
         
 
 \end{document}

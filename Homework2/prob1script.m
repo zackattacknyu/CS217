@@ -28,7 +28,7 @@ sel2 = perm(1:50) ;
 
 %does basic matching
 [matches, scores] = vl_ubcmatch(d1, d2) ;
-
+%%
 %goes through the points visualized in sel1 and sel2
 %   and finds their corresponding matches in the other images
 image1matches = matches(1,:);
@@ -84,7 +84,7 @@ set(h1,'color','k','linewidth',3) ;
 set(h2,'color','y','linewidth',2) ;
 h3 = vl_plotsiftdescriptor(d2(:,sel2),f2New) ;
 set(h3,'color','g') ;
-
+%%
 %plots the matches for the visualized points in each image
 hold on
 for i = 1:size(image1Points,2)

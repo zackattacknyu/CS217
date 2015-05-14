@@ -1,9 +1,13 @@
 %This code was used to select image points to use
+%   through direct selection to see if they 
+%   will end up corresponding when running RANSAC
+
 %imageName = 'coffeeCan';
-%imageName = 'squirtle';
-imageName = 'book';
+imageName = 'squirtle';
+%imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
+%%
 I1 = imread(image2);
 %I1 = imread(image1);
 I1 = single(rgb2gray(I1));
@@ -11,16 +15,41 @@ figure(1)
 curImg = imagesc(I1)
 colormap bone;
 %[X1 Y1] = getpts(1);
-[X2 Y2] = getpts(1);
+%[X2 Y2] = getpts(1);
 
 %%
 save('coffeeCanPts.mat','X1','X2','Y1','Y2','-v7.3');
 %%
+%loads points found using direct selection
 load('squirtlePts.mat');
 %%
 load('bookPts.mat');
 %%
 load('coffeeCanPts.mat');
+%%
+
+%pick points using SIFT
+%run SIFT on image1 and image2
+I1 = imread(image1);
+I1 = single(rgb2gray(I1));
+[f1,d1] = vl_sift(I1);
+I2 = imread(image2);
+I2 = single(rgb2gray(I2));
+[f2,d2] = vl_sift(I2);
+
+%does basic matching
+[matches, scores] = vl_ubcmatch(d1, d2) ;
+[bestScores,bestScoreInds] = sort(scores);
+sel1 = matches(1,bestScoreInds);
+sel1 = sel1(1:50);
+sel2 = matches(2,bestScoreInds);
+sel2 = sel2(1:50);
+%%
+%gets X1,X2,Y1,Y2
+X1 = f1(1,sel1)';
+Y1 = f1(2,sel1)';
+X2 = f2(1,sel2)';
+Y2 = f2(2,sel2)';
 %%
 
 %number of iterations of RANSAC
@@ -65,9 +94,9 @@ end
 
 %%
 
-%imageName = 'squirtle';
+imageName = 'squirtle';
 %imageName = 'coffeeCan';
-imageName = 'book';
+%imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 I1 = imread(image1);
