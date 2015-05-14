@@ -3,8 +3,8 @@
 %   will end up corresponding when running RANSAC
 
 %imageName = 'coffeeCan';
-imageName = 'squirtle';
-%imageName = 'book';
+%imageName = 'squirtle';
+imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 %%
@@ -37,6 +37,34 @@ I2 = imread(image2);
 I2 = single(rgb2gray(I2));
 [f2,d2] = vl_sift(I2);
 
+%%
+%for squirtle using SIFT, make sure points where y<400 is not included
+%       this is bc we don't care about the gradient there
+f1a = zeros(size(f1)); d1a = zeros(size(d1)); 
+f2a = zeros(size(f2)); d2a = zeros(size(d2));
+index = 1;
+N1 = size(f1,2); N2 = size(f2,2);
+for i = 1:N1
+    if(f1(2,i)>400)
+        f1a(:,index)=f1(:,i);
+        d1a(:,index)=d1(:,i);
+        index = index + 1;
+    end
+    
+end
+index = index-1;
+f1 = f1a(:,1:index);d1 = d1a(:,1:index);
+index = 1;
+for i = 1:N2
+    if(f2(2,i)>400)
+        f2a(:,index)=f2(:,i);
+        d2a(:,index)=d2(:,i);
+        index = index + 1;
+    end
+end
+index = index-1;
+f2 = f2a(:,1:index);d2 = d2a(:,1:index);
+%%
 %does basic matching
 [matches, scores] = vl_ubcmatch(d1, d2) ;
 [bestScores,bestScoreInds] = sort(scores);
@@ -94,9 +122,9 @@ end
 
 %%
 
-imageName = 'squirtle';
+%imageName = 'squirtle';
 %imageName = 'coffeeCan';
-%imageName = 'book';
+imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 I1 = imread(image1);

@@ -157,7 +157,7 @@ The code for this problem is in the folder as prob1script.m
 
 \section*{Problem 2}
 
-For problem 2, I used the same images as the previous problem and I used points chosen by myself as well as points chosen through SIFT. The first part of this write-up shows the results when I used my own parts. The second part of the write up shows the results when I used the points found through SIFT. As it turns out, the points found using SIFT gave much better results. 
+For problem 2, I used the same images as the previous problem and I used points chosen by myself as well as points chosen through SIFT. The first part of this write-up shows the results when I used my own parts. The second part of the write up shows the results when I used the points found through SIFT. As it turns out, the points found using SIFT gave much better results. With my own points, I made sure they were selected in the same order in both images so the matches had the same index. With the SIFT points, I used the matching results from running ubcmatch. In both cases, I decided to test each matching pair using RANSAC in order to get a final set of pairs. 
 
 \subsection*{Part A, My Points}
 
