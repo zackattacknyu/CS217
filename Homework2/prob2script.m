@@ -3,8 +3,8 @@
 %   will end up corresponding when running RANSAC
 
 %imageName = 'coffeeCan';
-%imageName = 'squirtle';
-imageName = 'book';
+imageName = 'squirtle';
+%imageName = 'book';
 image1 = strcat(imageName,'1.JPG');
 image2 = strcat(imageName,'2.JPG');
 %%
@@ -69,9 +69,9 @@ f2 = f2a(:,1:index);d2 = d2a(:,1:index);
 [matches, scores] = vl_ubcmatch(d1, d2) ;
 [bestScores,bestScoreInds] = sort(scores);
 sel1 = matches(1,bestScoreInds);
-sel1 = sel1(1:50);
+sel1 = sel1(1:100);
 sel2 = matches(2,bestScoreInds);
-sel2 = sel2(1:50);
+sel2 = sel2(1:100);
 %%
 %gets X1,X2,Y1,Y2
 X1 = f1(1,sel1)';

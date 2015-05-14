@@ -157,7 +157,7 @@ The code for this problem is in the folder as prob1script.m
 
 \section*{Problem 2}
 
-For problem 2, I used the same images as the previous problem and I used points chosen by myself as well as points chosen through SIFT. The first part of this write-up shows the results when I used my own parts. The second part of the write up shows the results when I used the points found through SIFT. As it turns out, the points found using SIFT gave much better results. With my own points, I made sure they were selected in the same order in both images so the matches had the same index. With the SIFT points, I used the matching results from running ubcmatch. In both cases, I decided to test each matching pair using RANSAC in order to get a final set of pairs. 
+For problem 2, I used the same images as the previous problem and I used points chosen by myself as well as points chosen through SIFT. The first part of this write-up shows the results when I used my own parts. The second part of the write up shows the results when I used the points found through SIFT. With my own points, I made sure they were selected in the same order in both images so the matches had the same index. With the SIFT points, I used the matching results from running ubcmatch. In both cases, I decided to test each matching pair using RANSAC in order to get a final set of pairs. 
 
 \subsection*{Part A, My Points}
 
@@ -287,7 +287,7 @@ Figures 18, 19, and 20 show the points chosen by SIFT in each image. I then ran 
 
 \subsection*{Part B, SIFT points}
 
-With the squirtle image, the epipole for the left image lies slightly above the epipole for the right image, suggesting that the left image was taken from a slightly raised viewpoint as compared to the right image. With the coffee can image, the epipole of the left image is below the epipole for right image, suggesting that it was taken from a lowered viewpoint. 
+With the squirtle image epipoles for these points, they are nearly in the same spot. This would suggest that I did not move the camera much between the two images, which is consistent with what happened. With the coffee can image, there is a clear epipole in the right image but it is not clear in the left image where the epipole is located. This suggests that there were some inaccurate picks of points in this case.
 
 \begin{figure}[H]
 \centering
@@ -307,13 +307,15 @@ With the squirtle image, the epipole for the left image lies slightly above the 
 
 \subsection*{Part C, SIFT points}
 
-The estimate for F is quite stable. I decided to compute it multiple times and find the standard deviation of the entries in the F matrix. I then summed the standard deviation. \\
+I repeated the procedure I did for my points to see the stability of F. \\
 \\
-For squirtle, the sum was near zero and 4 computations of the F matrix were done.\\
-For the textbook, the sum was 0.9567 and 6 computations of the F matrix were done.\\
-For the coffee can, the sum was 1.0140 and 6 computations of the F matrix were done. \\
+For squirtle, the sum was 1.0191 and 4 computations of the F matrix were done. I decided to increase the number of points to see if that would make it more stable. After using 100 points in the RANSAC computation, the sum of the standard deviations of the entries was 0.0048 thus it had nearly the stability of my other method. \\
 \\
-The best way to make F more robust would have been to add more points and then see if they correspond. With more data, the estimates get more robust. 
+For the textbook, the sum was near zero and 6 computations of the F matrix were done, thus it was more stable than my points.\\
+\\
+For the coffee can, the sum was near zero and 6 computations of the F matrix were done, thus it was more stable than my points. \\
+\\
+With these points, the estimates of F proved to be quite robust. As it turns out with the squirtle image, my hunch that when you add more points it becomes more robust proved correct. 
 
 \subsection*{Code for Problem 2}
 
