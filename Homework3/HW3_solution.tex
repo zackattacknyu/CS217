@@ -47,6 +47,8 @@
 
 \section*{Problem 1}
 
+\subsection{Part 1}
+
 If $L$ is the direction of the light source, $N$ is the normal to the surface, we know that the intensity of the light $I$ is given by
 \[
 I = |L| |N| cos(\alpha)
@@ -54,10 +56,21 @@ I = |L| |N| cos(\alpha)
 where $\alpha$ is the angle between $L$ and $N$.\\
 That equation is maximized when $cos(\alpha)=1$ so that $\alpha=0$\\
 This means that the normal is pointing in the direction of the light source. \\
-Thus the light source is in the direction of $(a,b)$ hence finally
+Thus the light source is in the direction of $(a,b)$.\\
+To find the corresponding point on the sphere, we need to find $c$ such that $a^2 + b^2 + c^2 = r^2$\\
+\\
+Since we are projecting the sphere onto the x-y plane, we are going to see the positive side, thus we will use the positive solution to the above equation. Thus our point on the sphere is as follows:
 \[
-L = (\frac{a}{\sqrt{a^2 + b^2}},\frac{b}{\sqrt{a^2 + b^2}})
+(a,b,\sqrt{r^2-(a^2+b^2)})
 \]
+That vector has magnitude $r$ thus the unit vector for this point that points in the direction of the light source is as follows:
+\[
+(\frac{a}{r},\frac{b}{r},\frac{\sqrt{r^2-(a^2+b^2)}}{r})
+\]
+
+\subsection{Part 2}
+
+For specular reflection, less light will reflect by the bright spot will be in the same spot. Thus the above equation is true for specular reflection too. 
 
 \end{document}
 
