@@ -39,3 +39,11 @@ for i = 1:11
     dir = [a/radius b/radius c/radius];
 
 end
+
+%%
+
+h=2*radius;
+E = [a b c-h];
+E = E./norm(E,2);
+N = dir./norm(dir,2);
+L = 2*N*(dot(E,N)) - E;
