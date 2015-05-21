@@ -70,7 +70,28 @@ That vector has magnitude $r$ thus the unit vector for this point that points in
 
 \subsection{Part 2}
 
-For specular reflection, less light will reflect by the bright spot will be in the same spot. Thus the above equation is true for specular reflection too. 
+Let $L$ be the direction of the light from $(a,b,c)$, \\
+$N$ be the normal to the surface at $(a,b,c)$, and \\
+$E$ be the vector pointing from $(a,b,c)$ to the viewer. \\
+\\
+$L$ will be the reflection vector of $E$ from the surface with normal $N$ since we have specular reflection\\
+This means that 
+\[
+L = 2N(E \cdot N) - E
+\]
+INSERT DIAGRAM OF THIS\\
+Let $h$ be the height with which we are viewing the sphere and $c' = c-h$, then\\
+$E = (a,b,c) - (0,0,h) = (a,b,c-h) = (a,b,c')$\\
+$N = \frac{1}{r}(a,b,c)$\\
+We thus get
+\[
+L = 2 \frac{a^2 + b^2 + c c'}{r^2} (a,b,c) - (a,b,c')
+\]
+If we let $D = \frac{2(a^2 + b^2 + c c')}{r^2}$ then
+\[
+L = (a(D-1) , b(D-1), cD - c')
+\]
+
 
 \end{document}
 
