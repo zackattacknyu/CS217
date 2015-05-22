@@ -23,6 +23,8 @@ radius = round(mean([radiusX,radiusY]));
 %%
 
 imageName = 'data/chrome/chrome.';
+E = [0 0 1];
+L = zeros(11,3);
 for i = 1:11
     curImageName = strcat(imageName,num2str(i),'.png');
     curImage = single(rgb2gray(imread(curImageName)));
@@ -37,13 +39,7 @@ for i = 1:11
     c = sqrt(radius^2 - a^2 - b^2);
     
     dir = [a/radius b/radius c/radius];
+    
+    L(i,:) = [2*a*c/radius^2 2*b*c/radius^2 2*c^2/radius^2-1];
 
 end
-
-%%
-
-h=2*radius;
-E = [a b c-h];
-E = E./norm(E,2);
-N = dir./norm(dir,2);
-L = 2*N*(dot(E,N)) - E;
