@@ -68,6 +68,8 @@ That vector has magnitude $r$ thus the unit vector for this point that points in
 (\frac{a}{r},\frac{b}{r},\frac{\sqrt{r^2-(a^2+b^2)}}{r})
 \]
 
+\newpage
+
 \subsection{Part 2}
 
 Let $L$ be the direction of the light from $(a,b,c)$, \\
@@ -80,17 +82,23 @@ This means that
 L = 2N(E \cdot N) - E
 \]
 INSERT DIAGRAM OF THIS\\
-Let $h$ be the height with which we are viewing the sphere and $c' = c-h$, then\\
-$E = (a,b,c) - (0,0,h) = (a,b,c-h) = (a,b,c')$\\
+E is parallel to the viewing direction thus \\
+$E=(0,0,1)$\\
 $N = \frac{1}{r}(a,b,c)$\\
-We thus get
+We can thus say that $E \cdot N = \frac{c}{r}$, finally letting us say that
 \[
-L = 2 \frac{a^2 + b^2 + c c'}{r^2} (a,b,c) - (a,b,c')
+L = (\frac{2ac}{r^2},\frac{2bc}{r^2},\frac{2c^2}{r^2} - 1)
 \]
-If we let $D = \frac{2(a^2 + b^2 + c c')}{r^2}$ then
+Now it holds that
 \[
-L = (a(D-1) , b(D-1), cD - c')
+||L||_2^2 = \frac{4a^2c^2 + 4b^2c^2 + 4c^4 - 4r^2c^2 + r^4}{r^4}
 \]
+Factoring out $4c^2$ gives us
+\[
+||L||_2^2 = \frac{4c^2(a^2 + b^2 + c^2 - r^2) + r^4}{r^4}
+\]
+We know that $r^2 = a^2 + b^2 + c^2$ thus finally $||L||_2^2 = 1$\\
+Proving that $L$ is a unit vector and thus in its final form
 
 
 \end{document}
