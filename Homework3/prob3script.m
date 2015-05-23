@@ -29,7 +29,7 @@ estimatedRow = zeros(1,length(xPts));
 estimatedNormal = zeros(length(xPts),2);
 indicesUsed = zeros(1,length(xPts));
 shadingThreshold = 100; %used to decide if in shadow or not
-numPointsThreshold = 3; %number of points not in a shadow
+numPointsThreshold = 2; %number of points not in a shadow
 newIndex = 0;
 for i = 1:length(xPts)
    row = xPts(i); col = yPts(i);
@@ -70,8 +70,11 @@ xyIndiciesToPlot = indicesUsed(randIndexOrder);
 xyIndiciesToPlot = xyIndiciesToPlot(1:numPoints);
 normalIndicesToPlot = randIndexOrder(1:numPoints);
 figure
-imagesc(curImageRed)
+%imagesc(curImageRed)
+newImg = reshape(redChannelImages(2,:,:),[340 512]);
+imagesc(newImg)
 hold on
-colormap bone
+colormap jet
 quiver(yPts(xyIndiciesToPlot),xPts(xyIndiciesToPlot),...
-    estimatedNormal(normalIndicesToPlot,2),estimatedNormal(normalIndicesToPlot,1))
+    estimatedNormal(normalIndicesToPlot,2),...
+    estimatedNormal(normalIndicesToPlot,1))
