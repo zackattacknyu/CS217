@@ -25,7 +25,9 @@ end
 
 %%
 
-for i = 1:1
+estimatedRow = zeros(1,length(xPts));
+estimatedNormal = zeros(length(xPts),2);
+for i = 1:length(xPts)
    row = xPts(i); col = yPts(i);
    pixel = [col row];
    pixelValues = redChannelImages(:,row,col);
@@ -36,9 +38,19 @@ for i = 1:1
    end
    
    %using standard least-squares linear regression fitting
-   estimatedG = ((transpose(lightDirs)*lightDirs)\transpose(lightDirs))*pixelValues;
+   estimatedG = ((transpose(lightDirs)*lightDirs)...
+       \transpose(lightDirs))*pixelValues;
+   
+   estimatedRow(i) = norm(estimatedG);
+   estimatedNormal(i,:) = estimatedG/norm(estimatedG);
 end
 
 %%
-imagesc(redChannelImages{5});
-colormap bone;
+quiver(yPts,xPts,estimatedNormal(:,2),estimatedNormal(:,1))
+
+%%
+numPoints = 800;
+ptsToPlot = randperm(length(xPts));
+ptsToPlot = ptsToPlot(1:numPoints);
+quiver(yPts(ptsToPlot),xPts(ptsToPlot),...
+    estimatedNormal(ptsToPlot,2),estimatedNormal(ptsToPlot,1))
