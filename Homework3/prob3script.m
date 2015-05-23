@@ -52,5 +52,8 @@ quiver(yPts,xPts,estimatedNormal(:,2),estimatedNormal(:,1))
 numPoints = 800;
 ptsToPlot = randperm(length(xPts));
 ptsToPlot = ptsToPlot(1:numPoints);
+figure
+imagesc(curImageRed)
+hold on
 quiver(yPts(ptsToPlot),xPts(ptsToPlot),...
     estimatedNormal(ptsToPlot,2),estimatedNormal(ptsToPlot,1))
