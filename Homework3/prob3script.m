@@ -27,33 +27,51 @@ end
 
 estimatedRow = zeros(1,length(xPts));
 estimatedNormal = zeros(length(xPts),2);
+indicesUsed = zeros(1,length(xPts));
+shadingThreshold = 100; %used to decide if in shadow or not
+numPointsThreshold = 3; %number of points not in a shadow
+newIndex = 0;
 for i = 1:length(xPts)
    row = xPts(i); col = yPts(i);
    pixel = [col row];
    pixelValues = redChannelImages(:,row,col);
-   lightDirs = zeros(11,2);
-   for img = 1:11
-        lightPixel = [maxIntensityCol(img) maxIntensityRow(img)];
-        lightDirs(img,:) = pixel-lightPixel;
+   imgIndicesToUse = find(pixelValues>shadingThreshold);
+
+   if(length(imgIndicesToUse) > numPointsThreshold)
+       pixelValuesToUse = pixelValues(imgIndicesToUse);
+       lightDirs = zeros(length(imgIndicesToUse),2);
+       
+       for img = 1:length(imgIndicesToUse)
+           curIndex = imgIndicesToUse(img);
+            lightPixel = [maxIntensityCol(curIndex) maxIntensityRow(curIndex)];
+            lightDirs(img,:) = pixel-lightPixel;
+       end
+
+       %using standard least-squares linear regression fitting
+       estimatedG = ((transpose(lightDirs)*lightDirs)...
+           \transpose(lightDirs))*pixelValuesToUse;
+
+       newIndex = newIndex + 1;
+       indicesUsed(newIndex) = i;
+       estimatedRow(newIndex) = norm(estimatedG);
+       estimatedNormal(newIndex,:) = estimatedG/norm(estimatedG);
    end
    
-   %using standard least-squares linear regression fitting
-   estimatedG = ((transpose(lightDirs)*lightDirs)...
-       \transpose(lightDirs))*pixelValues;
-   
-   estimatedRow(i) = norm(estimatedG);
-   estimatedNormal(i,:) = estimatedG/norm(estimatedG);
 end
 
-%%
-quiver(yPts,xPts,estimatedNormal(:,2),estimatedNormal(:,1))
+indicesUsed = indicesUsed(1:newIndex);
+estimatedRow = estimatedRow(1:newIndex);
+estimatedNormal = estimatedNormal(1:newIndex,:);
 
 %%
-numPoints = 800;
-ptsToPlot = randperm(length(xPts));
-ptsToPlot = ptsToPlot(1:numPoints);
+numPoints = min(length(indicesUsed),800);
+randIndexOrder = randperm(length(indicesUsed));
+xyIndiciesToPlot = indicesUsed(randIndexOrder);
+xyIndiciesToPlot = xyIndiciesToPlot(1:numPoints);
+normalIndicesToPlot = randIndexOrder(1:numPoints);
 figure
 imagesc(curImageRed)
 hold on
-quiver(yPts(ptsToPlot),xPts(ptsToPlot),...
-    estimatedNormal(ptsToPlot,2),estimatedNormal(ptsToPlot,1))
+colormap bone
+quiver(yPts(xyIndiciesToPlot),xPts(xyIndiciesToPlot),...
+    estimatedNormal(normalIndicesToPlot,2),estimatedNormal(normalIndicesToPlot,1))
