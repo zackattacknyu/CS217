@@ -2,11 +2,43 @@ images = cell(1,11);
 baseImageName = 'data/owl/owl.mask.png';
 baseImageNormal = imread(baseImageName);
 baseImage = single(rgb2gray(imread(baseImageName)));
+
+threshold = 100;
+[xPts,yPts]=find(baseImage>threshold);
+points = [xPts,yPts];
 %%
 imageName = 'data/owl/owl.';
-redChannelImages = cell(1,11);
+redChannelImages = zeros([11 size(baseImage)]);
+maxIntensity = zeros(1,11);
+maxIntensityRow = zeros(1,11);
+maxIntensityCol = zeros(1,11);
 for i = 1:11
     curImageName = strcat(imageName,num2str(i),'.png');
     curImage = imread(curImageName);
-    redChannelImages{i} = curImage(:,:,1);
+    curImageRed = curImage(:,:,1);
+    redChannelImages(i,:,:) = curImageRed;
+    maxCols = max(curImageRed,[],1); maxRows = max(curImageRed,[],2);
+    [~,colInd] = max(maxCols); [~,rowInd] = max(maxRows);
+    maxIntensityRow(i) = rowInd; maxIntensityCol(i) = colInd;
+    maxIntensity(i) = curImageRed(rowInd,colInd);
 end
+
+%%
+
+for i = 1:1
+   row = xPts(i); col = yPts(i);
+   pixel = [col row];
+   pixelValues = redChannelImages(:,row,col);
+   lightDirs = zeros(11,2);
+   for img = 1:11
+        lightPixel = [maxIntensityCol(img) maxIntensityRow(img)];
+        lightDirs(img,:) = pixel-lightPixel;
+   end
+   
+   %using standard least-squares linear regression fitting
+   estimatedG = ((transpose(lightDirs)*lightDirs)\transpose(lightDirs))*pixelValues;
+end
+
+%%
+imagesc(redChannelImages{5});
+colormap bone;
