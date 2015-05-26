@@ -78,3 +78,7 @@ colormap jet
 quiver(yPts(xyIndiciesToPlot),xPts(xyIndiciesToPlot),...
     estimatedNormal(normalIndicesToPlot,2),...
     estimatedNormal(normalIndicesToPlot,1))
+
+%%
+
+badInds = find(estimatedRow>256);
