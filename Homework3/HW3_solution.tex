@@ -47,7 +47,7 @@
 
 \section*{Problem 1}
 
-\subsection{Part 1}
+\subsection*{Part 1}
 
 If $L$ is the direction of the light source, $N$ is the normal to the surface, we know that the intensity of the light $I$ is given by
 \[
@@ -70,18 +70,29 @@ That vector has magnitude $r$ thus the unit vector for this point that points in
 
 \newpage
 
-\subsection{Part 2}
+\subsection*{Part 2}
 
 Let $L$ be the direction of the light from $(a,b,c)$, \\
 $N$ be the normal to the surface at $(a,b,c)$, and \\
 $E$ be the vector pointing from $(a,b,c)$ to the viewer. \\
 \\
 $L$ will be the reflection vector of $E$ from the surface with normal $N$ since we have specular reflection\\
-This means that 
+As illustrated below it will hold that
+\[
+L + E = 2N(E \cdot N)
+\]
+Thus we have the formula for $L$
 \[
 L = 2N(E \cdot N) - E
 \]
-INSERT DIAGRAM OF THIS\\
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{prob1diagram.jpg}
+\caption{Illustration of normal vector N, light vector L, and viewing vector E and their relationships}
+\end{figure}
+
+\newpage
+
 E is parallel to the viewing direction thus \\
 $E=(0,0,1)$\\
 $N = \frac{1}{r}(a,b,c)$\\
