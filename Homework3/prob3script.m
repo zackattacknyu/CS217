@@ -34,17 +34,20 @@ newIndex = 0;
 for i = 1:length(xPts)
    row = xPts(i); col = yPts(i);
    pixel = [col row];
-   pixelValues = redChannelImages(:,row,col);
+   pixelValues = redChannelImages(:,row,col); %makes sure it's in 0-1 range
    imgIndicesToUse = find(pixelValues>shadingThreshold);
 
    if(length(imgIndicesToUse) > numPointsThreshold)
        pixelValuesToUse = pixelValues(imgIndicesToUse);
+       pixelValuesToUse = pixelValuesToUse./256; %makes sure it's in 0-1 range
        lightDirs = zeros(length(imgIndicesToUse),2);
        
        for img = 1:length(imgIndicesToUse)
            curIndex = imgIndicesToUse(img);
             lightPixel = [maxIntensityCol(curIndex) maxIntensityRow(curIndex)];
-            lightDirs(img,:) = pixel-lightPixel;
+            currentLightDir = pixel-lightPixel;
+            currentLightDir = currentLightDir./norm(currentLightDir);
+            lightDirs(img,:) = currentLightDir;
        end
 
        %using standard least-squares linear regression fitting
@@ -81,4 +84,10 @@ quiver(yPts(xyIndiciesToPlot),xPts(xyIndiciesToPlot),...
 
 %%
 
-badInds = find(estimatedRow>256);
+goodInds = find(estimatedRow<=1); 
+
+%see how many were calculated successfully. has ended up equaling 95%
+ratio = length(goodInds)/length(estimatedRow); 
+
+%calculates row. it's about 0.5471
+rowValue = mean(estimatedRow(goodInds));
