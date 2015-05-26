@@ -15,9 +15,15 @@ maxIntensityCol = zeros(1,11);
 for i = 1:11
     curImageName = strcat(imageName,num2str(i),'.png');
     curImage = imread(curImageName);
+    
+    %{
+    I vary this line in order to switch between running the code
+            for the red, green, or blue channel
+    %}
     %curImageRed = curImage(:,:,1); %used when its red channel
     %curImageRed = curImage(:,:,2); %used for green channel
     curImageRed = curImage(:,:,3); %used for blue channel
+    
     redChannelImages(i,:,:) = curImageRed;
     maxCols = max(curImageRed,[],1); maxRows = max(curImageRed,[],2);
     [~,colInd] = max(maxCols); [~,rowInd] = max(maxRows);
@@ -88,7 +94,7 @@ quiver(yPts(xyIndiciesToPlot),xPts(xyIndiciesToPlot),...
 
 goodInds = find(estimatedRow<=1); 
 
-%see how many were calculated successfully. has ended up equaling 95%
+%see how many were calculated successfully. 
 ratio = length(goodInds)/length(estimatedRow); 
 
 %calculates average row.
