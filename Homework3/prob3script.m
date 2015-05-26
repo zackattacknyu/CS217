@@ -9,6 +9,7 @@ points = [xPts,yPts];
 %%
 imageName = 'data/owl/owl.';
 redChannelImages = zeros([11 size(baseImage)]);
+grayChannelImages = zeros([11 size(baseImage)]);
 maxIntensity = zeros(1,11);
 maxIntensityRow = zeros(1,11);
 maxIntensityCol = zeros(1,11);
@@ -17,6 +18,7 @@ for i = 1:11
     curImage = imread(curImageName);
     curImageRed = curImage(:,:,1);
     redChannelImages(i,:,:) = curImageRed;
+    grayChannelImages(i,:,:) = rgb2gray(curImage);
     maxCols = max(curImageRed,[],1); maxRows = max(curImageRed,[],2);
     [~,colInd] = max(maxCols); [~,rowInd] = max(maxRows);
     maxIntensityRow(i) = rowInd; maxIntensityCol(i) = colInd;
@@ -34,8 +36,9 @@ newIndex = 0;
 for i = 1:length(xPts)
    row = xPts(i); col = yPts(i);
    pixel = [col row];
-   pixelValues = redChannelImages(:,row,col); %makes sure it's in 0-1 range
-   imgIndicesToUse = find(pixelValues>shadingThreshold);
+   pixelValues = redChannelImages(:,row,col); 
+   pixelShadingValues = grayChannelImages(:,row,col);
+   imgIndicesToUse = find(pixelShadingValues>shadingThreshold);
 
    if(length(imgIndicesToUse) > numPointsThreshold)
        pixelValuesToUse = pixelValues(imgIndicesToUse);
