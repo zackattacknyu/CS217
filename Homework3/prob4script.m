@@ -15,7 +15,9 @@ maxIntensityCol = zeros(1,11);
 for i = 1:11
     curImageName = strcat(imageName,num2str(i),'.png');
     curImage = imread(curImageName);
-    curImageRed = curImage(:,:,3);
+    %curImageRed = curImage(:,:,1); %used when its red channel
+    %curImageRed = curImage(:,:,2); %used for green channel
+    curImageRed = curImage(:,:,3); %used for blue channel
     redChannelImages(i,:,:) = curImageRed;
     maxCols = max(curImageRed,[],1); maxRows = max(curImageRed,[],2);
     [~,colInd] = max(maxCols); [~,rowInd] = max(maxRows);
@@ -89,5 +91,17 @@ goodInds = find(estimatedRow<=1);
 %see how many were calculated successfully. has ended up equaling 95%
 ratio = length(goodInds)/length(estimatedRow); 
 
-%calculates row. it's about 0.5471
-rowValue = mean(estimatedRow(goodInds));
+%calculates average row.
+rhoValue = mean(estimatedRow(goodInds));
+
+rhoMatrix = zeros(size(newImg));
+for i = 1:length(estimatedRow)
+   if(estimatedRow(i) <= 1)
+      pixelIndex = indicesUsed(i);
+      row = xPts(pixelIndex); col = yPts(pixelIndex);
+      rhoMatrix(row,col) = estimatedRow(i);
+   end
+end
+imagesc(rhoMatrix);
+colormap bone;
+colorbar;
