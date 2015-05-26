@@ -188,22 +188,41 @@ $\rho_r = 0.5471$\\
 $\rho_g = 0.6722$\\
 $\rho_b = 0.6722$\\
 \\
+The code to compute everything is in prob4script.m. It is mostly the same as the code from Problem 3, except that I vary the color channel selection. \\
+\\
 Here are the needle diagrams for this problem. As can be observed, the normals point in roughly the same direction when a pixel has a normal in multiple channels. 
 \begin{figure}[H]
 \centering
-\includegraphics[height=3.5in]{prob4needlePlot1.png}
+\includegraphics[height=5.5in]{prob4needlePlot1.png}
 \caption{Needle Diagram for Red Channel}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[height=3.5in]{prob4needlePlot2.png}
+\includegraphics[height=5.5in]{prob4needlePlot2.png}
 \caption{Needle Diagram for Green Channel}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[height=3.5in]{prob4needlePlot3.png}
+\includegraphics[height=5.5in]{prob4needlePlot3.png}
 \caption{Needle Diagram for Blue Channel}
 \end{figure}
+\newpage
+Here are the figures for the $\rho$ values at each pixel with each channel. I set $\rho=0$ if it could not be computed at that pixel.
+\begin{figure}[H]
+\centering
+\includegraphics[height=5in]{prob4rhoPlot1.png}
+\caption{$\rho$ Plot for Red Channel}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=5in]{prob4rhoPlot2.png}
+\caption{$\rho$ Plot for Green Channel}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=5in]{prob4rhoPlot3.png}
+\caption{$\rho$ Plot for Blue Channel}
+\end{figure} 
 
 
 \end{document}
