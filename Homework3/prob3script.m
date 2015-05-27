@@ -112,7 +112,6 @@ xyIndiciesToPlot = indicesUsed(randIndexOrder);
 xyIndiciesToPlot = xyIndiciesToPlot(1:numPoints);
 normalIndicesToPlot = randIndexOrder(1:numPoints);
 figure
-newImg = reshape(redChannelImages(2,:,:),[340 512]);
 warp(curImage);
 hold on
 quiver3(yPts(xyIndiciesToPlot),xPts(xyIndiciesToPlot),...
