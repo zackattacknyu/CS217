@@ -12,7 +12,7 @@ imgNum = 1;
 for i = 0:totalFrames
     picToDisplay = readFrame(govObj);
     if(mod(i,numIterFrames) == 0)
-        fileName = strcat('sfmPics1/shot',num2str(imgNum),'.png');
+        fileName = strcat('sfmPics1J/shot',num2str(imgNum),'.JPEG');
         imwrite(picToDisplay,fileName);
         imgNum
         imgNum = imgNum + 1;
