@@ -13,7 +13,7 @@
 #
 # Set this variable to your base install path (e.g., /home/foo/bundler)
 # BASE_PATH="TODO"
-BASE_PATH="D:/dev/git/CS217/bundler-v0.4-source/bundler-v0.4-source"
+BASE_PATH="/cygdrive/d/dev/git/CS217/bundler-v0.4-source/bundler-v0.4-source"
 EXTRACT_FOCAL=$BASE_PATH/bin/extract_focal.pl
 OS=`uname -o`
 if [ $OS == "Cygwin" ]

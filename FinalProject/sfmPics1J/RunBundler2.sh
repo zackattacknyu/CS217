@@ -1,7 +1,7 @@
-#!/bin/bash
+#!binbash
 #
 # RunBundler.sh
-#   copyright 2008 Noah Snavely
+#   copyright 008 Noah Snavely
 #
 # A script for preparing a set of image for use with the Bundler 
 # structure-from-motion system.
@@ -11,35 +11,35 @@
 # The image_dir argument is the directory containing the input images.
 # If image_dir is omitted, the current directory is used.
 #
-# Set this variable to your base install path (e.g., /home/foo/bundler)
+# Set this variable to your base install path (e.g., homefoobundler)
 # BASE_PATH="TODO"
-BASE_PATH="D:/dev/git/CS217/bundler-v0.4-source/bundler-v0.4-source"
-EXTRACT_FOCAL=$BASE_PATH/bin/extract_focal.pl
+BASE_PATH="D:devgitCS7bundler-v0.4-sourcebundler-v0.4-source"
+EXTRACT_FOCAL=$BASE_PATHbinextract_focal.pl
 OS=`uname -o`
 if [ $OS == "Cygwin" ]
 then
-	MATCHKEYS=$BASE_PATH/bin/KeyMatchFull.exe
-	BUNDLER=$BASE_PATH/bin/Bundler.exe
+	MATCHKEYS=$BASE_PATHbinKeyMatchFull.exe
+	BUNDLER=$BASE_PATHbinBundler.exe
 else
-	MATCHKEYS=$BASE_PATH/bin/KeyMatchFull
-	BUNDLER=$BASE_PATH/bin/bundler
+	MATCHKEYS=$BASE_PATHbinKeyMatchFull
+	BUNDLER=$BASE_PATHbinbundler
 fi
-TO_SIFT=$BASE_PATH/bin/ToSift.sh
+TO_SIFT=$BASE_PATHbinToSift.sh
 IMAGE_DIR="."
-if [ $# -eq 1 ]
+if [ $# -eq  ]
 then
-	echo "Using directory '$1'"
-	IMAGE_DIR=$1
+	echo "Using directory '$'"
+	IMAGE_DIR=$
 fi
 # Rename ".JPG" to ".jpg"
-for d in `ls -1 $IMAGE_DIR | egrep ".JPG$"`
+for d in `ls - $IMAGE_DIR | egrep ".JPG$"`
 do 
-	mv $IMAGE_DIR/$d $IMAGE_DIR/`echo $d | sed 's/\.JPG/\.jpg/'`
+	mv $IMAGE_DIR$d $IMAGE_DIR`echo $d | sed 's\.JPG\.jpg'`
 done
 # Create the list of images
-find $IMAGE_DIR -maxdepth 1 | egrep ".jpg$" | sort > list_tmp.txt
+find $IMAGE_DIR -maxdepth  | egrep ".jpg$" | sort > list_tmp.txt
 $EXTRACT_FOCAL list_tmp.txt
-cp prepare/list.txt .
+cp preparelist.txt .
 # Run the ToSift script to generate a list of SIFT commands
 echo "[- Extracting keypoints -]"
 rm -f sift.txt
@@ -48,8 +48,8 @@ $TO_SIFT $IMAGE_DIR > sift.txt
 sh sift.txt
 # Match images (can take a while)
 echo "[- Matching keypoints (this can take a while) -]"
-sed 's/\.jpg$/\.key/' list_tmp.txt > list_keys.txt
-sleep 1
+sed 's\.jpg$\.key' list_tmp.txt > list_keys.txt
+sleep 
 echo $MATCHKEYS list_keys.txt matches.init.txt
 $MATCHKEYS list_keys.txt matches.init.txt
 # Generate the options file for running bundler 
@@ -62,11 +62,11 @@ echo "--output_dir bundle" >> options.txt
 echo "--variable_focal_length" >> options.txt
 echo "--use_focal_estimate" >> options.txt
 echo "--constrain_focal" >> options.txt
-echo "--constrain_focal_weight 0.0001" >> options.txt
+echo "--constrain_focal_weight 0.000" >> options.txt
 echo "--estimate_distortion" >> options.txt
 echo "--run_bundle" >> options.txt
 # Run Bundler!
 echo "[- Running Bundler -]"
 rm -f constraints.txt
 rm -f pairwise_scores.txt
-$BUNDLER list.txt --options_file options.txt > bundle/out
+$BUNDLER list.txt --options_file options.txt > bundleout
