@@ -137,3 +137,62 @@ points3D = xyzPoints';
 cam = calibrate(points3D,points2D);
 %%
 save('cameraParams26.mat','cam');
+
+
+%%
+
+%gets points for triangulation
+photoImage = imread('sfmPics1J2/shot26.jpg');
+figure(1)
+ax = image(photoImage);
+[xTR,yTR] = getpts(1);
+
+%%
+save('leftRightImagePoints.mat','xTR','yTR','xTL','yTL');
+
+%%
+photoImage = imread('sfmPics1J2/shot4.jpg');
+figure(1)
+ax = image(photoImage);
+[xTL,yTL] = getpts(1);
+
+%%
+%xTRold = xTR'; yTRold = yTR';
+xTR = [xTRold(1:31) xTRold(33:46) xTRold(48:65)];
+yTR = [yTRold(1:31) yTRold(33:46) yTRold(48:65)];
+
+%%
+
+photoImage = imread('sfmPics1J2/shot4.jpg');
+figure(1)
+ax = image(photoImage);
+[xP2,yP2] = getpts(1);
+
+%%
+
+points2D2 = [xP2';yP2'];
+points3D = xyzPoints';
+
+%attempt at calibrating camera
+camL = calibrate(points3D,points2D2);
+
+%%
+save('cameraParams.mat','camL','camR');
+
+%%
+left2Dpts = [xTL;yTL];
+right2Dpts = [xTR;yTR];
+%%
+allPts3D = triangulate(left2Dpts,right2Dpts,camL,camR);
+
+%%
+
+minX = min(allPts3D(1,:)); maxX = max(allPts3D(1,:));
+minY = min(allPts3D(2,:)); maxY = max(allPts3D(2,:));
+XX = linspace(minX,maxX,20);
+YY = linspace(minY,maxY,20);
+[Xgrid,Ygrid,Zgrid] = meshgrid(XX,YY,0);
+
+plot3(allPts3D(1,:),allPts3D(2,:),-allPts3D(3,:),'ro');
+hold on
+plot3(Xgrid,Ygrid,Zgrid,'bx');
