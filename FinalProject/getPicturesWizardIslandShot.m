@@ -15,7 +15,7 @@ for i = 0:totalFrames
     picToDisplay = readFrame(govObj);
     writeVideo(shot1obj,picToDisplay)
     if(mod(i,numIterFrames) == 0)
-        fileName = strcat('sfmPics3/shot',num2str(imgNum),'.JPEG');
+        fileName = strcat('sfmPics3/shot',num2str(imgNum),'.jpg');
         imwrite(picToDisplay,fileName);
         imgNum
         imgNum = imgNum + 1;
