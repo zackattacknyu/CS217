@@ -233,15 +233,56 @@ After running those points through the triangulation code, here was my reconstru
 
 As before, the reconstruction proved to be relatively poor. This is likely due to similar reasons as before where errors cost us dearly due to the scale and our object is so large to begin with that is seems relatively flat to the camera. 
 
+\newpage
+
+\subsection{VisualSFM Reconstruction Attempt}
+
+With this shot that I used, there was little to no translational motion and thus SFM would not work very well. I found this out the hard way when running Visual SFM. It did pick up on the following features:
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/shotFeatures_4.jpg}
+\caption{SIFT Features for left camera shot found using Visual SFM}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/shotFeatures_26.jpg}
+\caption{SIFT Features for right camera shot found using Visual SFM}
+\end{figure}
+It also found the following matches between two of the shots and matches between other images that were similar:
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/shot14_26_siftMatches.jpg}
+\caption{SIFT Matches found between images using VisualSFM}
+\end{figure}
+However, the points obtained in the 3D reconstruction had little to no pattern at all. One of the biggest additional difficulties was that VisualSFM detected points on the lake and points in the sky and since those points do not have good structure to them, they likely skewed the final results. 
+
+
 \section{Reconstruction of Wizard Island Scene}
 
+I found a video of Crater Lake where they show Wizard Island up close and then it cuts to a shot of Wizard Island where the camera is behind the original shot and from a different persective. I decided to put these frames through Visual SFM to see if the translational motion would produce better SFM results. Here is the 3D Reconstruction computed using VisualSFM of those frames. 
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[height=3.5in]{prob1diagram.jpg}
-%\caption{Illustration of normal vector N, light vector L, and viewing vector E and their relationships}
-%\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults3/3Dreconstruction1.jpg}
+\caption{3D Reconstruction Points}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults3/3DreconstructionFromMany1.jpg}
+\caption{3D Reconstruction Points}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults3/3DreconstructionFromMany2.jpg}
+\caption{3D Reconstruction Points}
+\end{figure}
 
+As can be observed, VisualSFM did indeed detect that one of the pictures was taken from a vantage point which was behind the other picture. It also seemed to reconstruct the 2D shape of Wizard Island relatively well. Unfortunately, there was almost no depth to each of the points. 
+
+
+\section{Conclusion}
+
+After attempting to reconstruct mountain scenes using photos, I have a new appreciation for topographic maps and elevation data sets. Capturing the depth with mountains seems to be one of the biggest challenges. The other major challenge is the immense size requires shots that were taken very far apart. It can be hard to find good pairs due to these requirement. 
 
 
 
