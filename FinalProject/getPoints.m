@@ -160,24 +160,34 @@ save('cameraParams4.mat','camL','camR');
 photoImage = imread('sfmPics1J2/shot26.jpg');
 figure(1)
 ax = image(photoImage);
-[xTR,yTR] = getpts(1);
+%[xTR1,yTR1] = getpts(1);
+%[xTR2,yTR2] = getpts(1);
+[xTR3,yTR3] = getpts(1);
 %%
 save('right_topRidgePoints.mat','xTR1','yTR1');
+save('right_lakeRidgePoints.mat','xTR2','yTR2');
+save('right_wizardIslandPoints.mat','xTR3','yTR3');
 %%
 photoImage = imread('sfmPics1J2/shot4.jpg');
 figure(1)
 ax = image(photoImage);
-[xTL,yTL] = getpts(1);
+%[xTL1,yTL1] = getpts(1);
+%[xTL2,yTL2] = getpts(1);
+[xTL3,yTL3] = getpts(1);
 
 %%
 
 save('left_topRidgePoints.mat','xTL1','yTL1');
-
+save('left_lakeRidgePoints.mat','xTL2','yTL2');
+save('left_wizardIslandPoints.mat','xTL3','yTL3');
 %%
-%xTRold = xTR'; yTRold = yTR';
-xTR = [xTRold(1:31) xTRold(33:46) xTRold(48:65)];
-yTR = [yTRold(1:31) yTRold(33:46) yTRold(48:65)];
 
+
+xTR = [xTR1' xTR2' xTR3'];
+yTR = [yTR1' yTR2' yTR3'];
+
+xTL = [xTL1' xTL2' xTL3'];
+yTL = [yTL1' yTL2' yTL3'];
 
 %%
 left2Dpts = [xTL;yTL];
@@ -193,6 +203,9 @@ XX = linspace(minX,maxX,20);
 YY = linspace(minY,maxY,20);
 [Xgrid,Ygrid,Zgrid] = meshgrid(XX,YY,0);
 
-plot3(allPts3D(1,:),allPts3D(2,:),-allPts3D(3,:),'ro');
+figure
+plot3(allPts3D(1,1:17),allPts3D(2,1:17),-allPts3D(3,1:17),'ro'); %gives us top ridge
 hold on
+plot3(allPts3D(1,18:29),allPts3D(2,18:29),-allPts3D(3,18:29),'go'); %gives us lake ridge
+plot3(allPts3D(1,30:41),allPts3D(2,30:41),-allPts3D(3,30:41),'bo'); %gives us wizard island
 plot3(Xgrid,Ygrid,Zgrid,'bx');
