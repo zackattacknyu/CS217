@@ -193,6 +193,10 @@ yTL = [yTL1' yTL2' yTL3'];
 left2Dpts = [xTL;yTL];
 right2Dpts = [xTR;yTR];
 %%
+%to run after using SIFT to find the 2D points
+left2Dpts = image1Points; 
+right2Dpts = image2Points;
+%%
 allPts3D = triangulate(left2Dpts,right2Dpts,camL,camR);
 
 %%
@@ -204,8 +208,15 @@ YY = linspace(minY,maxY,20);
 [Xgrid,Ygrid,Zgrid] = meshgrid(XX,YY,0);
 
 figure
+plot3(allPts3D(1,:),allPts3D(2,:),-allPts3D(3,:),'ro');
+hold on
+plot3(Xgrid,Ygrid,Zgrid,'bx');
+
+%{
+figure
 plot3(allPts3D(1,1:17),allPts3D(2,1:17),-allPts3D(3,1:17),'ro'); %gives us top ridge
 hold on
 plot3(allPts3D(1,18:29),allPts3D(2,18:29),-allPts3D(3,18:29),'go'); %gives us lake ridge
 plot3(allPts3D(1,30:41),allPts3D(2,30:41),-allPts3D(3,30:41),'bo'); %gives us wizard island
 plot3(Xgrid,Ygrid,Zgrid,'bx');
+%}

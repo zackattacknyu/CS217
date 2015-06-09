@@ -4,6 +4,7 @@
 imageName = 'sfmPics1J2/shot';
 image1 = strcat(imageName,'4.jpg');
 image2 = strcat(imageName,'26.jpg');
+image1Mask = strcat(imageName,'4mask.png');
 
 %run SIFT on image1 and image2
 I1 = imread(image1);
@@ -13,16 +14,18 @@ I2 = imread(image2);
 I2 = single(rgb2gray(I2));
 [f2,d2] = vl_sift(I2);
 
+I1mask = imread(image1Mask);
+I1mask = single(rgb2gray(I1mask));
+
 %%
-%Make sure points where y<150 or y>700 is not included
-%   y<150 is the sky
-%   y>700 is only the lake
+%Make sure points I1mask > 128 are included
 f1a = zeros(size(f1)); d1a = zeros(size(d1)); 
 f2a = zeros(size(f2)); d2a = zeros(size(d2));
 index = 1;
 N1 = size(f1,2); N2 = size(f2,2);
 for i = 1:N1
-    if(f1(2,i)>150 && f1(2,i)<700)
+    rr = floor(f1(2,i)); cc = floor(f1(1,i));
+    if(I1mask(rr,cc) > 128) %in the mask region
         f1a(:,index)=f1(:,i);
         d1a(:,index)=d1(:,i);
         index = index + 1;
