@@ -166,52 +166,72 @@ Here is a 3D visualization of the approximated 3D Points. The blue x marks repre
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttempt.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttempt2.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttempt3.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttempt4.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 
 As can be observed, the reconstruction proved to be quite poor and while there is some shape, it is not at all what we expect. There are a few likely reasons for this. The biggest challenge is the immense size of what I am trying to image. Because the pictures were taken thousands of feet away from the object, it is likely that the image is relatively flat from the camera's perspective and thus when we move the camera, it does not pick up on much depth. The other major challenge was picking points accurately. Because the object was thousands of feet away, a single pixel error meant the estimate would be off by hundreds of feet. The aggregate of all these errors could easily have a major impact on the camera parameter estimates and final reconstruction. 
 
+\newpage
+
 \subsection{SIFT Features}
 
-In order to improve my triangulation points, I decided to run SIFT using VLFeat and use the best 100 matches. 
+In order to improve my triangulation points, I decided to run SIFT using VLFeat and use the best 100 matches. I used the following mask to make sure points were selected on wizard island or the background mountains. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/Shot4Mask.png}
+\caption{Mask for selecting points}
+\end{figure}
+These were the SIFT matches computed:
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/siftMatchesVLFeat1.png}
+\caption{SIFT Feature matches}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/siftMatchesVLFeat2.png}
+\caption{Point matches using SIFT}
+\end{figure}
 
 
-Here was my reconstruction:
+After running those points through the triangulation code, here was my reconstruction. As before, the blue x marks represent the $z=0$ plane. The red circles represent the SIFT points in 3D:
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttemptSIFT1.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttemptSIFT2.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttemptSIFT3.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/triangulationAttemptSIFT4.png}
-\caption{Calibration Points with elevations listed}
+\caption{3D Reconstruction Points}
 \end{figure}
+
+As before, the reconstruction proved to be relatively poor. This is likely due to similar reasons as before where errors cost us dearly due to the scale and our object is so large to begin with that is seems relatively flat to the camera. 
 
 \section{Reconstruction of Wizard Island Scene}
 
