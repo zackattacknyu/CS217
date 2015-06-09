@@ -92,7 +92,7 @@ After looking at multiple high definition videos of Crater Lake, there were two 
 
 The shots taken from Merriam Point had some distinguishable landmarks. There is existing spatial data on these landmarks thus I attempted to do calibration with the 3D data. 
 
-\subsection{3D Points}
+\subsection{3D Calibration Points}
 
 The points I focused on were various peaks as well as recognizable points on the surface of the lake. These points could easily be spotted in a topographic map. Here is the left camera shot marked with the points used:
 \begin{figure}[H]
@@ -124,6 +124,41 @@ The z coordinate represented the height in feet. I decided to make the surface o
 \caption{Calibration Points with elevations listed}
 \end{figure}
 
+\subsection{Triangulation Points using Manual Selection}
+
+After calibrating the left and right images, I decided to try triangulating points by manually selecting them in both images and seeing if a good reconstruction could be calculated. I split the points into 3 groups in order to more easily see how good the reconstruction ended up. Here is the left camera shot with the triangulation points. 
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/photoLeft_lakeRidgePoints.png}
+\caption{Triangulation Points along the lake}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/photoLeft_topRidgePoints.png}
+\caption{Triangulation Points along the mountain peaks}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/photoLeft_wizardIslandPoints.png}
+\caption{Triangulation Points along Wizard Island}
+\end{figure}
+
+Here is the right camera shot with the triangulation points.
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/photoRight_lakeRidgePoints.png}
+\caption{Triangulation Points along the lake}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/photoRight_topRidgePoints.png}
+\caption{Triangulation Points along the mountain peaks}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[height=3.5in]{sfmResults1/photoRight_wizardIslandPoints.png}
+\caption{Triangulation Points along Wizard Island}
+\end{figure}
 \newpage
 
 \section{Reconstruction of Wizard Island Scene}
