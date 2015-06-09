@@ -134,10 +134,25 @@ points2D = [xP';yP'];
 points3D = xyzPoints';
 
 %attempt at calibrating camera
-cam = calibrate(points3D,points2D);
+camR = calibrate(points3D,points2D);
 %%
-save('cameraParams26.mat','cam');
+save('cameraParams26.mat','camR');
+%%
 
+%{
+photoImage = imread('sfmPics1J2/shot4.jpg');
+figure(1)
+ax = image(photoImage);
+[xP2,yP2] = getpts(1);
+
+points2D2 = [xP2';yP2'];
+points3D = xyzPoints';
+
+%attempt at calibrating camera
+camL = calibrate(points3D,points2D2);
+
+save('cameraParams4.mat','camL','camR');
+%}
 
 %%
 
@@ -146,10 +161,8 @@ photoImage = imread('sfmPics1J2/shot26.jpg');
 figure(1)
 ax = image(photoImage);
 [xTR,yTR] = getpts(1);
-
 %%
-save('leftRightImagePoints.mat','xTR','yTR','xTL','yTL');
-
+save('right_topRidgePoints.mat','xTR1','yTR1');
 %%
 photoImage = imread('sfmPics1J2/shot4.jpg');
 figure(1)
@@ -157,27 +170,14 @@ ax = image(photoImage);
 [xTL,yTL] = getpts(1);
 
 %%
+
+save('left_topRidgePoints.mat','xTL1','yTL1');
+
+%%
 %xTRold = xTR'; yTRold = yTR';
 xTR = [xTRold(1:31) xTRold(33:46) xTRold(48:65)];
 yTR = [yTRold(1:31) yTRold(33:46) yTRold(48:65)];
 
-%%
-
-photoImage = imread('sfmPics1J2/shot4.jpg');
-figure(1)
-ax = image(photoImage);
-[xP2,yP2] = getpts(1);
-
-%%
-
-points2D2 = [xP2';yP2'];
-points3D = xyzPoints';
-
-%attempt at calibrating camera
-camL = calibrate(points3D,points2D2);
-
-%%
-save('cameraParams.mat','camL','camR');
 
 %%
 left2Dpts = [xTL;yTL];
