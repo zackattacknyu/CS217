@@ -98,7 +98,30 @@ The points I focused on were various peaks as well as recognizable points on the
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{sfmResults1/Photo_withPoints.png}
-\caption{Wizard Island Scene, further shot}
+\caption{Left Camera Shot with Calibration Points marked}
+\end{figure}
+
+\newpage
+
+Here are the topographic maps for the points shown in the previous picture. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/TopMap_withPoints_wizardIsland.png}
+\caption{Calibration Points near Wizard Island on Topographic Map}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/TopMap_withPoints_peaks.png}
+\caption{Calibration Points at the peaks on Topographic Map}
+\end{figure}
+
+I used the maps to obtain the $x,y$ coordinates for each of my calibration points. I made the origin the point on both maps where the latitude line is labeled 51 and the longitude line is labeled 47. I used the map scale to obtain a conversion from pixels to feet and my 3D points were in feet.  \\
+\\
+The z coordinate represented the height in feet. I decided to make the surface of the lake my $z=0$ plane. In order to obtain the z coordinate for my points, I used the following map which showed the exact elevations for each of my points. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{sfmResults1/elevationsListed.png}
+\caption{Calibration Points with elevations listed}
 \end{figure}
 
 \newpage
