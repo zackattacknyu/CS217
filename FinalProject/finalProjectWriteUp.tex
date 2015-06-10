@@ -287,7 +287,7 @@ However, the points obtained in the 3D reconstruction had little to no pattern a
 
 \section{Reconstruction of Wizard Island Scene}
 
-I found a video of Crater Lake where they show Wizard Island up close and then it cuts to a shot of Wizard Island where the camera is behind the original shot and from a different persective. I decided to put these frames through Visual SFM to see if the translational motion would produce better SFM results. Here is the 3D Reconstruction computed using VisualSFM of those frames. 
+I found another scene where they show Wizard Island up close and then it cuts to a shot of Wizard Island where the camera is behind the original shot and from a different persective. I decided to put these frames through Visual SFM to see if the translational motion would produce better SFM results. Here is the 3D Reconstruction computed using VisualSFM of those frames. 
 
 \begin{figure}[H]
 \centering
@@ -305,18 +305,29 @@ I found a video of Crater Lake where they show Wizard Island up close and then i
 \caption{3D Reconstruction Points}
 \end{figure}
 
+\newpage 
+
 As can be observed, VisualSFM did indeed detect that one of the pictures was taken from a vantage point which was behind the other picture. It also seemed to reconstruct the 2D shape of Wizard Island relatively well. Unfortunately, there was almost no depth to each of the points. 
 
+\newpage
 
-\section{Conclusion and References}
+\section{Conclusion}
 
-After attempting to reconstruct mountain scenes using photos, I have a new appreciation for topographic maps and elevation data sets. Capturing the depth with mountains seems to be one of the biggest challenges. The other major challenge is the immense size requires shots that were taken very far apart. It can be hard to find good pairs due to these requirement. 
+After attempting to reconstruct mountain scenes using photos, I have a new appreciation for topographic maps and elevation data sets. Capturing the depth when looking at a mountain seems to be one of the biggest challenges as none of my reconstruction methods were remotely accurate with it. The lack of distance between vantage points was a likely culprit in why the depth calculations were very inaccurate. Additionally, in a picture of a mountain, there are patches of trees, rocks, and snow and the patches can look quite similar. Thus the probability of selecting bad point matches is relatively high. \\
+\\
+In the end, I was not close to being able to construct something similar to what Google Earth provides. If I do want to make a 3D reconstruction of a mountain, then I will use the entire elevation data set of it from the United States Geological Survey (USGS). This way it will likely be much more detailed and accurate than a stereo reconstruction. This is likely the method employed by Google Earth. 
+
+\section{Attached Code}
 
 \subsection{Matlab Code and Data}
 
 The code getPoints.m was the script used to attempt the 3D reconstruction of the shot from Merriam Point. The code siftMatching.m computed the SIFT matches using VLFeat. \\
 \\
 The folder entitled data contains the input I used. The subfolder merriamPointData contains the input images that were used in the 3D reconstruction of Merriam Point. The subfolder wizardIslandPicsForVisualSFM contains the images that were put through VisualSFM for the reconstruction of the second shot. 
+
+\newpage
+
+\section{References}
 
 \subsection{Video Sources}
 
@@ -328,6 +339,11 @@ The shots of Wizard Island were frames in the following video at time 3:48
 \begin{verbatim}
 https://www.youtube.com/watch?v=VImqiFWRWZ4
 \end{verbatim}
+
+\subsection{Geographic Data}
+
+The topographic maps I used were sections of the maps Crater Lake West and Crater Lake East from the United States Geological Survey. The map showing the exact elevations is a section of the standard map of Crater Lake National Park from the National Park Service. 
+
 
 
 \end{document}
