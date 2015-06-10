@@ -280,15 +280,26 @@ I found a video of Crater Lake where they show Wizard Island up close and then i
 As can be observed, VisualSFM did indeed detect that one of the pictures was taken from a vantage point which was behind the other picture. It also seemed to reconstruct the 2D shape of Wizard Island relatively well. Unfortunately, there was almost no depth to each of the points. 
 
 
-\section{Conclusion}
+\section{Conclusion and References}
 
 After attempting to reconstruct mountain scenes using photos, I have a new appreciation for topographic maps and elevation data sets. Capturing the depth with mountains seems to be one of the biggest challenges. The other major challenge is the immense size requires shots that were taken very far apart. It can be hard to find good pairs due to these requirement. 
 
-\subsection{Matlab Code}
+\subsection{Matlab Code and Data}
 
-The code getPicturesMerriamPointShot.m and getPicturesWizardIslandShot.m were the scripts used to get the shots from the high definition video.\\
+The code getPoints.m was the script used to attempt the 3D reconstruction of the shot from Merriam Point. The code siftMatching.m computed the SIFT matches using VLFeat. \\
 \\
-The code getPoints.m was the script used to attempt the 3D reconstruction of the shot from Merriam Point. The code siftMatching.m computed the SIFT matches using VLFeat. 
+The folder entitled data contains the input I used. The subfolder merriamPointData contains the input images that were used in the 3D reconstruction of Merriam Point. The subfolder wizardIslandPicsForVisualSFM contains the images that were put through VisualSFM for the reconstruction of the second shot. 
+
+\subsection{Video Sources}
+
+The shots of Merriam Point were frames in the following video at time 5:11
+\begin{verbatim}
+https://www.youtube.com/watch?v=qbH5--nwxdk
+\end{verbatim}
+The shots of Wizard Island were frames in the following video at time 3:48
+\begin{verbatim}
+https://www.youtube.com/watch?v=VImqiFWRWZ4
+\end{verbatim}
 
 
 \end{document}
