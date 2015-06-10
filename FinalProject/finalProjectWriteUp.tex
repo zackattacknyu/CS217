@@ -50,39 +50,54 @@ For this project, I attempted a 3D reconstruction of parts of Crater Lake Nation
 \includegraphics[width=\columnwidth]{craterLakeWinter.jpg}
 \caption{Crater Lake during winter}
 \end{figure}
-Google Earth offers a 3D view of Crater Lake and my goal was something close to what it showed. There is an island in the middle of the lake called Wizard Island. I decided to focus on that island as well as nearby ridges for my reconstruction. \\
+Google Earth offers a 3D view of Crater Lake and my goal was something close to what it showed. There is an island in the middle of the lake called Wizard Island. I decided to focus on that island as well as nearby mountain peaks for my reconstruction. \\
 \\
 I used pictures taken from different angles in order to do the reconstruction. In order to ensure that I had a wealth of pictures to use, I found high definition video and used a handful of the frames. That way I do not need to worry about using pictures that were taken at different times of the day or year.\\
 \\
-After looking at multiple high definition videos of Crater Lake, there were two scenes that I decided to attempt to reconstruct. The first one was taken from Merriam Point and it shows Wizard Island as well as nearby peaks. The second one was taken from different points on the surface of the lake and it shows two views of Wizard Island. The first scene had relatively little translational motion thus SFM did not work too well. The second scene had some translational motion thus SFM performed slightly better. 
+After looking at multiple high definition videos of Crater Lake, there were two scenes that I decided to attempt to reconstruct. The first one was taken from Merriam Point and it shows Wizard Island as well as nearby peaks. The second one was taken from different points on the surface of the lake and it shows two views of Wizard Island. \\
+\\
+\newpage
+
+Here are images of Crater Lake via Google Earth
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{googleEarthView1.png}
-\caption{Top View of Crater Lake using Google Earth}
+\caption{Goal Sample: Top View of Crater Lake using Google Earth}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{googleEarthView2.png}
-\caption{Side View of Crater Lake using Google Earth}
+\caption{Goal Sample: Side View of Crater Lake using Google Earth}
 \end{figure}
+
+\newpage
+
+Here are two of the shots from the Merriam Point scene
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{sfmPics1J2/shot4.jpg}
+\includegraphics[height=3.5in]{sfmPics1J2/shot4.jpg}
 \caption{Merriam Point Scene, Left Camera Shot}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{sfmPics1J2/shot26.jpg}
+\includegraphics[height=3.5in]{sfmPics1J2/shot26.jpg}
 \caption{Merriam Point Scene, Right Camera Shot}
 \end{figure}
+
+\newpage
+
+Here are two shots from the other scene showing Wizard Island
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{sfmPics3/shot1.jpg}
+\includegraphics[height=3.5in]{sfmPics3/shot1.jpg}
 \caption{Wizard Island Scene, close up shot}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{sfmPics3/shot24.jpg}
+\includegraphics[height=3.5in]{sfmPics3/shot24.jpg}
 \caption{Wizard Island Scene, further shot}
 \end{figure}
 
@@ -90,7 +105,7 @@ After looking at multiple high definition videos of Crater Lake, there were two 
 
 \section{Reconstruction of Merriam Point Scene}
 
-The shots taken from Merriam Point had some distinguishable landmarks. There is existing spatial data on these landmarks thus I attempted to do calibration with the 3D data. 
+To do this reconstruction, I tried Calibration and Triangulation as well as VisualSFM. For calibration, I used a few distinguishable landmarks in the picture. There is existing data already on these landmarks which I used to get the scene 3D points for calibration.  
 
 \subsection{3D Calibration Points}
 
@@ -115,7 +130,7 @@ Here are the topographic maps for the points shown in the previous picture.
 \caption{Calibration Points at the peaks on Topographic Map}
 \end{figure}
 
-I used the maps to obtain the $x,y$ coordinates for each of my calibration points. I made the origin the point on both maps where the latitude line is labeled 51 and the longitude line is labeled 47. I used the map scale to obtain a conversion from pixels to feet and my 3D points were in feet.  \\
+I used the maps to obtain the $x,y$ coordinates for each of my calibration points. I made the origin the point on both maps where the latitude line is labeled 51 and the longitude line is labeled 47. I used the map scale to obtain a conversion from pixels to feet so that my units for the 3D coordinates were in feet.  \\
 \\
 The z coordinate represented the height in feet. I decided to make the surface of the lake my $z=0$ plane. In order to obtain the z coordinate for my points, I used the following map which showed the exact elevations for each of my points. 
 \begin{figure}[H]
@@ -124,7 +139,9 @@ The z coordinate represented the height in feet. I decided to make the surface o
 \caption{Calibration Points with elevations listed}
 \end{figure}
 
-\subsection{Triangulation Points using Manual Selection}
+\newpage
+
+\subsection{Triangulation using Manually Selected Points}
 
 After calibrating the left and right images, I decided to try triangulating points by manually selecting them in both images and seeing if a good reconstruction could be calculated. I split the points into 3 groups in order to more easily see how good the reconstruction ended up. Here is the left camera shot with the triangulation points. 
 \begin{figure}[H]
@@ -142,6 +159,8 @@ After calibrating the left and right images, I decided to try triangulating poin
 \includegraphics[height=3.5in]{sfmResults1/photoLeft_wizardIslandPoints.png}
 \caption{Triangulation Points along Wizard Island}
 \end{figure}
+
+\newpage
 
 Here is the right camera shot with the triangulation points.
 \begin{figure}[H]
@@ -188,7 +207,7 @@ As can be observed, the reconstruction proved to be quite poor and while there i
 
 \newpage
 
-\subsection{SIFT Features}
+\subsection{Triangulation using SIFT Matches}
 
 In order to improve my triangulation points, I decided to run SIFT using VLFeat and use the best 100 matches. I used the following mask to make sure points were selected on wizard island or the background mountains. 
 \begin{figure}[H]
@@ -196,18 +215,22 @@ In order to improve my triangulation points, I decided to run SIFT using VLFeat 
 \includegraphics[width=\columnwidth]{sfmResults1/Shot4Mask.png}
 \caption{Mask for selecting points}
 \end{figure}
-These were the SIFT matches computed:
+
+\newpage
+
+These were the SIFT features and matches computed:
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{sfmResults1/siftMatchesVLFeat1.png}
-\caption{SIFT Feature matches}
+\caption{SIFT Features}
 \end{figure}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{sfmResults1/siftMatchesVLFeat2.png}
-\caption{Point matches using SIFT}
+\caption{SIFT matches between images}
 \end{figure}
 
+\newpage
 
 After running those points through the triangulation code, here was my reconstruction. As before, the blue x marks represent the $z=0$ plane. The red circles represent the SIFT points in 3D:
 \begin{figure}[H]
@@ -231,13 +254,13 @@ After running those points through the triangulation code, here was my reconstru
 \caption{3D Reconstruction Points}
 \end{figure}
 
-As before, the reconstruction proved to be relatively poor. This is likely due to similar reasons as before where errors cost us dearly due to the scale and our object is so large to begin with that is seems relatively flat to the camera. 
+As before, the reconstruction proved to be relatively poor. This is likely due to the same reasons as before. Using SIFT does reduce the possible error that stems from being inaccurate by a few pixels when selecting points, provided that those points were good matches in the first place. Issues estimating depth still appear since our camera did not move much as compared to the size of the objects involved.   
 
 \newpage
 
 \subsection{VisualSFM Reconstruction Attempt}
 
-With this shot that I used, there was little to no translational motion and thus SFM would not work very well. I found this out the hard way when running Visual SFM. It did pick up on the following features:
+With the shots that I used, there was little to no translational motion and thus SFM did not work well. I found this out the hard way when running Visual SFM. In any case, this is what VisualSFM was able to accomplish with these shots. It picked up on the following features:
 \begin{figure}[H]
 \centering
 \includegraphics[height=3.5in]{sfmResults1/shotFeatures_4.jpg}
@@ -248,14 +271,19 @@ With this shot that I used, there was little to no translational motion and thus
 \includegraphics[height=3.5in]{sfmResults1/shotFeatures_26.jpg}
 \caption{SIFT Features for right camera shot found using Visual SFM}
 \end{figure}
-It also found the following matches between two of the shots and matches between other images that were similar:
+\newpage
+It also found the following matches between two of the shots. Matches between other pairs were similar. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\columnwidth]{sfmResults1/shot14_26_siftMatches.jpg}
 \caption{SIFT Matches found between images using VisualSFM}
 \end{figure}
-However, the points obtained in the 3D reconstruction had little to no pattern at all. One of the biggest additional difficulties was that VisualSFM detected points on the lake and points in the sky and since those points do not have good structure to them, they likely skewed the final results. 
 
+\newpage
+
+However, the points obtained in the 3D reconstruction had little to no pattern at all. All the cameras were also in one spot. In addition to the obstacles already mentioned, there was an additional issue in that VisualSFM detected points on the lake and points in the sky. Those points do not have good structure to them, thus they likely skewed the final results. 
+
+\newpage
 
 \section{Reconstruction of Wizard Island Scene}
 
